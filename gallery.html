@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery | Himanshu</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #7c4dff;
+      --secondary: #ff4081;
+      --dark: #0f0524;
+      --light: #f8f9fa;
+      --accent: #00dbde;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      background: var(--dark);
+      color: var(--light);
+      font-family: 'Poppins', Arial, sans-serif;
+      overflow-x: hidden;
+      position: relative;
+    }
+    
+    /* Animated Background */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+    
+    .bg-circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(127, 114, 249, 0.073);
+      animation: float 15s infinite linear;
+      filter: blur(40px);
+    }
+    
+    .bg-icon {
+      position: absolute;
+      font-size: 2rem;
+      color: rgba(255, 255, 255, 0.993);
+      animation: floatIcon 20s infinite linear;
+    }
+    
+    @keyframes float {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+      }
+      50% {
+        transform: translate(50px, 50px) rotate(180deg);
+      }
+      100% {
+        transform: translate(0, 0) rotate(360deg);
+      }
+    }
+    
+    @keyframes floatIcon {
+      0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 0;
+      }
+      25% {
+        opacity: 0.3;
+      }
+      50% {
+        transform: translate(100px, 100px) rotate(180deg);
+        opacity: 0.1;
+      }
+      75% {
+        opacity: 0.3;
+      }
+      100% {
+        transform: translate(0, 0) rotate(360deg);
+        opacity: 0;
+      }
+    }
+    
+    /* Navbar */
+    .navbar {
+      background: rgba(26, 0, 51, 0.8);
+      padding: 1.5rem 0;
+      backdrop-filter: blur(10px);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .navbar .nav-link, .navbar-brand {
+      color: var(--light) !important;
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: 1.5rem;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    
+    .navbar .nav-link.active, .navbar .nav-link:hover {
+      color: var(--secondary) !important;
+    }
+    
+    .navbar .nav-link:after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background: var(--secondary);
+      transition: width 0.3s ease;
+    }
+    
+    .navbar .nav-link:hover:after {
+      width: 100%;
+    }
+    
+    .navbar-brand {
+      font-size: 1.8rem;
+      margin-left: 1.5rem;
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+    
+    .navbar-nav {
+      display: flex;
+      align-items: center;
+      margin-right: 1.5rem;
+    }
+    
+    /* Gallery Container */
+    .gallery-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 8rem 1rem 4rem 1rem;
+    }
+    
+    .gallery-title {
+      text-align: center;
+      margin-bottom: 3rem;
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      position: relative;
+      display: inline-block;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    
+    .gallery-title:after {
+      content: '';
+      position: absolute;
+      width: 60%;
+      height: 4px;
+      bottom: -10px;
+      left: 20%;
+      background: linear-gradient(90deg, transparent, var(--primary), var(--secondary), transparent);
+      border-radius: 2px;
+    }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2.5rem;
+    }
+    
+    .gallery-item {
+      background: rgba(26, 0, 51, 0.6);
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(124, 77, 255, 0.2);
+    }
+    
+    .gallery-item:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 64, 129, 0.1), transparent);
+      transition: 0.5s;
+    }
+    
+    .gallery-item:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 12px 40px rgba(255, 64, 129, 0.25);
+      border-color: rgba(255, 64, 129, 0.4);
+    }
+    
+    .gallery-item:hover:before {
+      left: 100%;
+    }
+    
+    .gallery-img, .gallery-video {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      margin-bottom: 1.2rem;
+      background: #222;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      opacity: 0;
+    }
+    
+    .gallery-img.loaded {
+      opacity: 1;
+    }
+    
+    .gallery-img.loading {
+      background: linear-gradient(90deg, #1a0033 0%, #2a0044 50%, #1a0033 100%);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite;
+    }
+    
+    @keyframes loading {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+    
+    .gallery-item:hover .gallery-img,
+    .gallery-item:hover .gallery-video {
+      transform: scale(1.05);
+    }
+    
+    .gallery-video {
+      min-height: 200px;
+      height: auto;
+    }
+    
+    .gallery-caption {
+      margin-top: 0.8rem;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: 500;
+      color: var(--light);
+      transition: color 0.3s ease;
+    }
+    
+    .gallery-item:hover .gallery-caption {
+      color: var(--secondary);
+    }
+    
+    /* Lightbox Modal */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 5, 36, 0.95);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(10px);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    
+    .lightbox.active {
+      display: flex;
+      opacity: 1;
+    }
+    
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 90%;
+      position: relative;
+    }
+    
+    .lightbox-img, .lightbox-video {
+      max-width: 100%;
+      max-height: 80vh;
+      border-radius: 8px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    }
+    
+    .lightbox-video {
+      width: 800px;
+      height: auto;
+    }
+    
+    .lightbox-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    
+    .lightbox-close:hover {
+      color: var(--secondary);
+    }
+    
+    .lightbox-caption {
+      position: absolute;
+      bottom: -40px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      color: white;
+      font-size: 1.2rem;
+      padding: 0.5rem;
+    }
+    
+    /* Back Button */
+    .back-home-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: linear-gradient(45deg, var(--primary), var(--accent));
+      color: #fff;
+      border: none;
+      border-radius: 50px;
+      padding: 12px 24px;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(124, 77, 255, 0.3);
+      z-index: 100;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    
+    .back-home-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(124, 77, 255, 0.4);
+      background: linear-gradient(45deg, var(--secondary), var(--primary));
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .gallery-title {
+        font-size: 2rem;
+        margin-bottom: 2rem;
+      }
+      
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+      }
+      
+      .gallery-item {
+        padding: 1rem;
+      }
+      
+      .gallery-img, .gallery-video {
+        height: 200px;
+      }
+      
+      .lightbox-video {
+        width: 95%;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .gallery-title {
+        font-size: 1.8rem;
+      }
+      
+      .gallery-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .navbar-brand {
+        font-size: 1.5rem;
+      }
+      
+      .navbar .nav-link {
+        margin-right: 1rem;
+        font-size: 0.9rem;
+      }
+    }
+    
+    /* Personality Tags */
+    .personality-tags {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      z-index: 100;
+    }
+    
+    .personality-tag {
+      background: rgba(124, 77, 255, 0.2);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      border: 1px solid rgba(124, 77, 255, 0.4);
+      backdrop-filter: blur(5px);
+      animation: floatTag 8s infinite ease-in-out;
+    }
+    
+    .personality-tag:nth-child(1) { animation-delay: 0s; }
+    .personality-tag:nth-child(2) { animation-delay: 1s; }
+    .personality-tag:nth-child(3) { animation-delay: 2s; }
+    .personality-tag:nth-child(4) { animation-delay: 3s; }
+    .personality-tag:nth-child(5) { animation-delay: 4s; }
+    
+    @keyframes floatTag {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated Background -->
+  <div class="bg-animation">
+    <!-- Background Circles -->
+    <div class="bg-circle" style="width: 400px; height: 400px; top: 10%; left: 5%; animation-duration: 20s;"></div>
+    <div class="bg-circle" style="width: 500px; height: 500px; top: 60%; left: 70%; animation-duration: 25s;"></div>
+    <div class="bg-circle" style="width: 300px; height: 300px; top: 30%; left: 40%; animation-duration: 18s;"></div>
+    <div class="bg-circle" style="width: 450px; height: 450px; top: 20%; left: 60%; animation-duration: 22s;"></div>
+    <div class="bg-circle" style="width: 350px; height: 350px; top: 70%; left: 20%; animation-duration: 19s;"></div>
+    <div class="bg-circle" style="width: 250px; height: 250px; top: 40%; left: 80%; animation-duration: 16s;"></div>
+    
+    <!-- Personality Icons -->
+    <div class="bg-icon" style="top: 15%; left: 20%; animation-delay: 0s;">👨‍💻</div>
+    <div class="bg-icon" style="top: 25%; left: 80%; animation-delay: 2s;">✈️</div>
+    <div class="bg-icon" style="top: 45%; left: 15%; animation-delay: 4s;">❤️</div>
+    <div class="bg-icon" style="top: 65%; left: 75%; animation-delay: 6s;">🚀</div>
+    <div class="bg-icon" style="top: 85%; left: 25%; animation-delay: 8s;">🌍</div>
+    <div class="bg-icon" style="top: 35%; left: 60%; animation-delay: 10s;">💻</div>
+    <div class="bg-icon" style="top: 75%; left: 40%; animation-delay: 12s;">🎯</div>
+    <div class="bg-icon" style="top: 55%; left: 85%; animation-delay: 14s;">🌟</div>
+    <div class="bg-icon" style="top: 5%; left: 50%; animation-delay: 1s;">🎨</div>
+    <div class="bg-icon" style="top: 90%; left: 60%; animation-delay: 3s;">📚</div>
+    <div class="bg-icon" style="top: 20%; left: 90%; animation-delay: 5s;">🎮</div>
+    <div class="bg-icon" style="top: 60%; left: 10%; animation-delay: 7s;">🎵</div>
+    <div class="bg-icon" style="top: 30%; left: 30%; animation-delay: 9s;">🎭</div>
+    <div class="bg-icon" style="top: 80%; left: 90%; animation-delay: 11s;">🎪</div>
+    <div class="bg-icon" style="top: 10%; left: 70%; animation-delay: 13s;">🎯</div>
+    <div class="bg-icon" style="top: 50%; left: 45%; animation-delay: 15s;">🎨</div>
+    <div class="bg-icon" style="top: 70%; left: 65%; animation-delay: 17s;">🎭</div>
+    <div class="bg-icon" style="top: 40%; left: 25%; animation-delay: 19s;">🎪</div>
+    <div class="bg-icon" style="top: 25%; left: 55%; animation-delay: 21s;">🎮</div>
+    <div class="bg-icon" style="top: 95%; left: 35%; animation-delay: 23s;">🎵</div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a class="navbar-brand" href="index.html">Himanshu</a>
+    <div class="navbar-nav">
+      <a class="nav-link" href="about.html">About</a>
+      <a class="nav-link" href="projects.html">Projects</a>
+      <a class="nav-link active" href="gallery.html">Gallery</a>
+      <a class="nav-link" href="certification.html">Certifications</a>
+      <a class="nav-link" href="activities.html">Activities</a>
+      <a class="nav-link" href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Gallery Container -->
+  <div class="gallery-container">
+    <h1 class="gallery-title">My Journey Gallery</h1>
+    <div class="gallery-grid">
+      <!-- Gallery items will be dynamically populated by JavaScript -->
+    </div>
+  </div>
+
+  <!-- Personality Tags -->
+  <div class="personality-tags">
+    <div class="personality-tag">👨‍💻 Passionate Coder</div>
+    <div class="personality-tag">✈️ Adventurous Traveler</div>
+    <div class="personality-tag">🚀 Self-Motivated</div>
+    <div class="personality-tag">🌍 Explorer</div>
+  </div>
+
+  <button class="back-home-btn" onclick="location.href='index.html'">
+    <i class="fas fa-home"></i> Back to Home
+  </button>
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox" id="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <div class="lightbox-content">
+      <img id="lightbox-img" class="lightbox-img" style="display:none;">
+      <video id="lightbox-video" class="lightbox-video" controls style="display:none;">
+        Your browser does not support the video tag.
+      </video>
+      <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <script>
+    // Gallery data
+    const galleryItems = [
+      { type: 'image', src: 'assets/gallery/highlights/1.JPG', caption: 'Image 1' },
+      { type: 'image', src: 'assets/gallery/highlights/1.2.JPG', caption: 'Image 2' },
+      { type: 'image', src: 'assets/gallery/highlights/1.3.JPG', caption: 'Image 3' },
+      { type: 'image', src: 'assets/gallery/highlights/2.JPG', caption: 'Image 4' },
+      { type: 'image', src: 'assets/gallery/highlights/2.1.JPG', caption: 'Image 5' },
+      { type: 'image', src: 'assets/gallery/highlights/2.3.JPG', caption: 'Image 6' },
+      { type: 'image', src: 'assets/gallery/highlights/2.4.JPG', caption: 'Image 7' },
+      { type: 'image', src: 'assets/gallery/highlights/2.5.JPG', caption: 'Image 8' },
+      { type: 'image', src: 'assets/gallery/highlights/2.6.JPG', caption: 'Image 9' },
+      { type: 'image', src: 'assets/gallery/highlights/2.7.JPG', caption: 'Image 10' },
+      { type: 'image', src: 'assets/gallery/highlights/3.JPG', caption: 'Image 11' },
+      { type: 'image', src: 'assets/gallery/highlights/3.1.JPG', caption: 'Image 12' },
+      { type: 'image', src: 'assets/gallery/highlights/3.2.JPG', caption: 'Image 13' },
+      { type: 'image', src: 'assets/gallery/highlights/3.6.JPG', caption: 'Image 14' },
+      { type: 'image', src: 'assets/gallery/highlights/3.7.JPG', caption: 'Image 15' },
+      { type: 'image', src: 'assets/gallery/highlights/4.JPG', caption: 'Image 16' },
+      { type: 'image', src: 'assets/gallery/highlights/4.1.JPG', caption: 'Image 17' },
+      { type: 'image', src: 'assets/gallery/highlights/4.4.JPG', caption: 'Image 18' },
+      { type: 'image', src: 'assets/gallery/highlights/6.JPG', caption: 'Image 19' },
+      { type: 'image', src: 'assets/gallery/highlights/7.1.JPG', caption: 'Image 20' },
+      { type: 'image', src: 'assets/gallery/highlights/7.2.JPG', caption: 'Image 21' }, 
+      { type: 'image', src: 'assets/gallery/highlights/8.1.JPG', caption: 'Image 22' }, 
+      { type: 'image', src: 'assets/gallery/highlights/8.JPG', caption: 'Image 23' }, 
+      { type: 'image', src: 'assets/gallery/highlights/8.2.JPG', caption: 'Image 24' }, 
+      { type: 'image', src: 'assets/gallery/highlights/9.JPG', caption: 'Image 25' },
+      { type: 'image', src: 'assets/gallery/highlights/10.JPG', caption: 'Image 26' },
+      { type: 'image', src: 'assets/gallery/highlights/11.JPG', caption: 'Image 27' },
+      { type: 'image', src: 'assets/gallery/highlights/12.JPG', caption: 'Image 28' },
+      { type: 'image', src: 'assets/gallery/highlights/13.JPG', caption: 'Image 29' },
+      { type: 'image', src: 'assets/gallery/highlights/14.JPG', caption: 'Image 30' },
+      { type: 'image', src: 'assets/gallery/highlights/15.JPG', caption: 'Image 31' },
+      { type: 'image', src: 'assets/gallery/highlights/16.JPG', caption: 'Image 32' },
+      { type: 'image', src: 'assets/gallery/highlights/17.JPG', caption: 'Image 33' },
+      { type: 'image', src: 'assets/gallery/highlights/20.JPG', caption: 'Image 34' },
+      { type: 'image', src: 'assets/gallery/highlights/21.JPG', caption: 'Image 35' },
+      { type: 'image', src: 'assets/gallery/highlights/23.JPG', caption: 'Image 36' },
+      { type: 'image', src: 'assets/gallery/highlights/25.JPG', caption: 'Image 37' },
+      { type: 'image', src: 'assets/gallery/highlights/29.JPG', caption: 'Image 38' },
+      { type: 'image', src: 'assets/gallery/highlights/30.JPG', caption: 'Image 39' },
+      { type: 'image', src: 'assets/gallery/highlights/32.JPG', caption: 'Image 40' },
+      { type: 'image', src: 'assets/gallery/highlights/33.JPG', caption: 'Image 41' },
+      { type: 'image', src: 'assets/gallery/highlights/35.JPG', caption: 'Image 42' },
+      { type: 'image', src: 'assets/gallery/highlights/38.JPG', caption: 'Image 43' },
+      { type: 'image', src: 'assets/gallery/highlights/41.JPG', caption: 'Image 44' },
+      { type: 'image', src: 'assets/gallery/highlights/44.JPG', caption: 'Image 45' },
+      { type: 'image', src: 'assets/gallery/highlights/54.JPG', caption: 'Image 46' },
+      { type: 'image', src: 'assets/gallery/highlights/55.JPG', caption: 'Image 47' },
+      { type: 'image', src: 'assets/gallery/highlights/56.JPG', caption: 'Image 48' },
+      { type: 'image', src: 'assets/gallery/highlights/57.JPG', caption: 'Image 49' },
+      { type: 'image', src: 'assets/gallery/highlights/58.JPG', caption: 'Image 50' },
+      { type: 'image', src: 'assets/gallery/highlights/59.JPG', caption: 'Image 51' },
+      { type: 'image', src: 'assets/gallery/highlights/60.JPG', caption: 'Image 52' },
+      { type: 'image', src: 'assets/gallery/highlights/61.JPG', caption: 'Image 53' },
+      { type: 'image', src: 'assets/gallery/highlights/98.JPG', caption: 'Image 54' },
+      { type: 'image', src: 'assets/gallery/highlights/63.JPG', caption: 'Image 55' },
+      { type: 'image', src: 'assets/gallery/highlights/64.JPG', caption: 'Image 56' },
+      { type: 'image', src: 'assets/gallery/highlights/65.JPG', caption: 'Image 57' },
+      { type: 'image', src: 'assets/gallery/highlights/66.JPG', caption: 'Image 58' },
+      { type: 'image', src: 'assets/gallery/highlights/67.JPG', caption: 'Image 59' },
+      { type: 'image', src: 'assets/gallery/highlights/68.JPG', caption: 'Image 60' },
+      { type: 'image', src: 'assets/gallery/highlights/69.JPG', caption: 'Image 61' },
+      { type: 'image', src: 'assets/gallery/highlights/70.JPG', caption: 'Image 62' },
+      { type: 'image', src: 'assets/gallery/highlights/71.JPG', caption: 'Image 63' },
+      { type: 'image', src: 'assets/gallery/highlights/72.JPG', caption: 'Image 64' },
+      { type: 'image', src: 'assets/gallery/highlights/73.JPG', caption: 'Image 65' },
+      { type: 'image', src: 'assets/gallery/highlights/74.JPG', caption: 'Image 66' },
+      { type: 'image', src: 'assets/gallery/highlights/75.JPG', caption: 'Image 67' },
+      { type: 'image', src: 'assets/gallery/highlights/76.JPG', caption: 'Image 68' },
+      { type: 'image', src: 'assets/gallery/highlights/77.JPG', caption: 'Image 69' },
+      { type: 'image', src: 'assets/gallery/highlights/78.JPG', caption: 'Image 70' },
+      { type: 'image', src: 'assets/gallery/highlights/79.JPG', caption: 'Image 71' },
+      { type: 'image', src: 'assets/gallery/highlights/80.JPG', caption: 'Image 72' },
+      { type: 'image', src: 'assets/gallery/highlights/81.JPG', caption: 'Image 73' },
+      { type: 'image', src: 'assets/gallery/highlights/82.JPG', caption: 'Image 74' },
+      { type: 'image', src: 'assets/gallery/highlights/83.JPG', caption: 'Image 75' },
+      { type: 'image', src: 'assets/gallery/highlights/84.JPG', caption: 'Image 76' },
+      { type: 'image', src: 'assets/gallery/highlights/85.JPG', caption: 'Image 77' },
+      { type: 'image', src: 'assets/gallery/highlights/86.JPG', caption: 'Image 78' },
+      { type: 'image', src: 'assets/gallery/highlights/87.JPG', caption: 'Image 79' },
+      { type: 'image', src: 'assets/gallery/highlights/88.JPG', caption: 'Image 80' },
+      { type: 'image', src: 'assets/gallery/highlights/89.JPG', caption: 'Image 81' },
+      { type: 'image', src: 'assets/gallery/highlights/90.JPG', caption: 'Image 82' },
+      { type: 'image', src: 'assets/gallery/highlights/91.JPG', caption: 'Image 83' },
+      { type: 'image', src: 'assets/gallery/highlights/92.JPG', caption: 'Image 84' },  
+      { type: 'image', src: 'assets/gallery/highlights/93.JPG', caption: 'Image 85' },
+      { type: 'image', src: 'assets/gallery/highlights/94.JPG', caption: 'Image 86' },
+      { type: 'image', src: 'assets/gallery/highlights/95.JPG', caption: 'Image 87' },
+      { type: 'image', src: 'assets/gallery/highlights/96.JPG', caption: 'Image 88' },
+      { type: 'image', src: 'assets/gallery/highlights/97.JPG', caption: 'Image 89' },
+      { type: 'image', src: 'assets/gallery/highlights/98.JPG', caption: 'Image 90' },  
+      { type: 'image', src: 'assets/gallery/highlights/99.JPG', caption: 'Image 91' },
+      { type: 'image', src: 'assets/gallery/highlights/100.JPG', caption: 'Image 92' },
+      { type: 'image', src: 'assets/gallery/highlights/101.JPG', caption: 'Image 93' },
+      { type: 'image', src: 'assets/gallery/highlights/102.JPG', caption: 'Image 94' },
+      { type: 'image', src: 'assets/gallery/highlights/103.JPG', caption: 'Image 95' },
+      { type: 'image', src: 'assets/gallery/highlights/104.JPG', caption: 'Image 96' }, 
+      { type: 'image', src: 'assets/gallery/highlights/105.JPG', caption: 'Image 97' },
+      { type: 'image', src: 'assets/gallery/highlights/145.JPG', caption: 'Image 98' },
+      { type: 'image', src: 'assets/gallery/highlights/107.JPG', caption: 'Image 99' },
+      { type: 'image', src: 'assets/gallery/highlights/108.JPG', caption: 'Image 100' },
+      { type: 'image', src: 'assets/gallery/highlights/109.JPG', caption: 'Image 101' },
+      { type: 'image', src: 'assets/gallery/highlights/110.JPG', caption: 'Image 102' },  
+      { type: 'image', src: 'assets/gallery/highlights/111.JPG', caption: 'Image 103' },
+      { type: 'image', src: 'assets/gallery/highlights/112.JPG', caption: 'Image 104' },
+      { type: 'image', src: 'assets/gallery/highlights/113.JPG', caption: 'Image 105' },
+      { type: 'image', src: 'assets/gallery/highlights/114.JPG', caption: 'Image 106' },
+      { type: 'image', src: 'assets/gallery/highlights/115.JPG', caption: 'Image 107' },
+      { type: 'image', src: 'assets/gallery/highlights/116.JPG', caption: 'Image 108' },  
+      { type: 'image', src: 'assets/gallery/highlights/117.JPG', caption: 'Image 109' },
+      { type: 'image', src: 'assets/gallery/highlights/118.JPG', caption: 'Image 110' },
+      { type: 'image', src: 'assets/gallery/highlights/119.JPG', caption: 'Image 111' },
+      { type: 'image', src: 'assets/gallery/highlights/120.JPG', caption: 'Image 112' },
+      { type: 'image', src: 'assets/gallery/highlights/121.JPG', caption: 'Image 113' },
+      { type: 'image', src: 'assets/gallery/highlights/122.JPG', caption: 'Image 114' },  
+      { type: 'image', src: 'assets/gallery/highlights/123.JPG', caption: 'Image 115' },
+      { type: 'image', src: 'assets/gallery/highlights/124.JPG', caption: 'Image 116' },
+      { type: 'image', src: 'assets/gallery/highlights/125.JPG', caption: 'Image 117' },
+      { type: 'image', src: 'assets/gallery/highlights/126.JPG', caption: 'Image 118' },
+      { type: 'image', src: 'assets/gallery/highlights/127.JPG', caption: 'Image 119' },
+      { type: 'image', src: 'assets/gallery/highlights/128.JPG', caption: 'Image 120' },  
+      { type: 'image', src: 'assets/gallery/highlights/129.JPG', caption: 'Image 121' },
+      { type: 'image', src: 'assets/gallery/highlights/130.JPG', caption: 'Image 122' },
+      { type: 'image', src: 'assets/gallery/highlights/131.JPG', caption: 'Image 123' },
+      { type: 'image', src: 'assets/gallery/highlights/132.JPG', caption: 'Image 124' },
+      { type: 'image', src: 'assets/gallery/highlights/133.JPG', caption: 'Image 125' },
+      { type: 'image', src: 'assets/gallery/highlights/134.JPG', caption: 'Image 126' },  
+      { type: 'image', src: 'assets/gallery/highlights/135.JPG', caption: 'Image 127' },
+      { type: 'image', src: 'assets/gallery/highlights/136.JPG', caption: 'Image 128' },
+      { type: 'image', src: 'assets/gallery/highlights/137.JPG', caption: 'Image 129' },
+      { type: 'image', src: 'assets/gallery/highlights/138.JPG', caption: 'Image 130' },
+      { type: 'image', src: 'assets/gallery/highlights/139.JPG', caption: 'Image 131' },
+      { type: 'image', src: 'assets/gallery/highlights/140.JPG', caption: 'Image 132' },  
+      { type: 'image', src: 'assets/gallery/highlights/141.JPG', caption: 'Image 133' },
+      { type: 'image', src: 'assets/gallery/highlights/142.JPG', caption: 'Image 134' },
+      { type: 'image', src: 'assets/gallery/highlights/143.JPG', caption: 'Image 135' },
+      { type: 'image', src: 'assets/gallery/highlights/144.JPG', caption: 'Image 136' },
+      { type: 'image', src: 'assets/gallery/highlights/145.JPG', caption: 'Image 137' },
+      { type: 'image', src: 'assets/gallery/highlights/146.JPG', caption: 'Image 138' },  
+      { type: 'image', src: 'assets/gallery/highlights/147.JPG', caption: 'Image 139' },
+      { type: 'image', src: 'assets/gallery/highlights/148.JPG', caption: 'Image 140' },
+      { type: 'image', src: 'assets/gallery/highlights/149.JPG', caption: 'Image 141' },
+      { type: 'image', src: 'assets/gallery/highlights/150.JPG', caption: 'Image 142' },
+      { type: 'image', src: 'assets/gallery/highlights/151.JPG', caption: 'Image 143' },
+      { type: 'image', src: 'assets/gallery/highlights/152.JPG', caption: 'Image 144' },  
+      { type: 'image', src: 'assets/gallery/highlights/153.JPG', caption: 'Image 145' },
+      { type: 'image', src: 'assets/gallery/highlights/154.JPG', caption: 'Image 146' },
+      { type: 'image', src: 'assets/gallery/highlights/155.JPG', caption: 'Image 147' },  
+    ];
+
+    // Populate gallery
+    const galleryGrid = document.querySelector('.gallery-grid');
+    
+    galleryItems.forEach((item, index) => {
+      const galleryItem = document.createElement('div');
+      galleryItem.className = 'gallery-item';
+      galleryItem.setAttribute('data-index', index);
+      
+      if (item.type === 'image') {
+        galleryItem.innerHTML = `
+          <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'/%3E" 
+               data-src="${item.src}" 
+               alt="${item.caption}" 
+               class="gallery-img loading"
+               loading="lazy"
+               onload="this.classList.remove('loading'); this.classList.add('loaded');">
+        `;
+      } else if (item.type === 'video') {
+        galleryItem.innerHTML = `
+          <video class="gallery-video" controls preload="none">
+            <source src="${item.src}" type="video/mp4">
+          </video>
+        `;
+      }
+      
+      galleryGrid.appendChild(galleryItem);
+    });
+
+    // Intersection Observer for lazy loading
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src;
+          observer.unobserve(img);
+        }
+      });
+    });
+
+    document.querySelectorAll('img[data-src]').forEach(img => {
+      imageObserver.observe(img);
+    });
+
+    // Lightbox functionality
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxVideo = document.getElementById('lightbox-video');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const closeBtn = document.querySelector('.lightbox-close');
+    
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.addEventListener('click', function() {
+        const index = this.getAttribute('data-index');
+        const galleryItem = galleryItems[index];
+        
+        if (galleryItem.type === 'image') {
+          lightboxImg.style.display = 'block';
+          lightboxVideo.style.display = 'none';
+          lightboxImg.src = galleryItem.src;
+        } else if (galleryItem.type === 'video') {
+          lightboxImg.style.display = 'none';
+          lightboxVideo.style.display = 'block';
+          lightboxVideo.src = galleryItem.src;
+        }
+        
+        lightboxCaption.textContent = galleryItem.caption;
+        lightbox.classList.add('active');
+      });
+    });
+    
+    closeBtn.addEventListener('click', function() {
+      lightbox.classList.remove('active');
+      lightboxVideo.pause();
+    });
+    
+    lightbox.addEventListener('click', function(e) {
+      if (e.target === lightbox) {
+        lightbox.classList.remove('active');
+        lightboxVideo.pause();
+      }
+    });
+    
+    // Add floating animation to personality tags
+    const tags = document.querySelectorAll('.personality-tag');
+    tags.forEach(tag => {
+      const duration = 8 + Math.random() * 4;
+      tag.style.animationDuration = `${duration}s`;
+    });
+  </script>
+</body>
+</html>

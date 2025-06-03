@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Himanshu | Professional Activities</title>
+    
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Confetti JS -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
+
+        :root {
+            --primary-color: #6c63ff;
+            --secondary-color: #4d44db;
+            --dark-color: #1a1a2e;
+            --light-color: #f8f9fa;
+            --accent-color: #00b4d8;
+            --neon-pink: #ff6b6b;
+            --neon-blue: #0af;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            color: var(--light-color);
+            background-color: var(--dark-color);
+            transition: background 0.5s ease;
+        }
+
+        body.light-mode {
+            --dark-color: #f8f9fa;
+            --light-color: #1a1a2e;
+            background-color: var(--dark-color);
+            color: var(--light-color);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 500;
+        }
+        
+        /* Particles Background */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: var(--dark-color);
+        }
+        
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            z-index: -1;
+        }
+        
+        /* Navbar */
+        .navbar {
+            padding: 20px 0;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+        
+        .navbar.scrolled {
+            background-color: rgba(26, 26, 46, 0.9) !important;
+            backdrop-filter: blur(10px);
+            padding: 5px 0;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .light-mode .navbar.scrolled {
+            background-color: rgba(248, 249, 250, 0.9) !important;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--light-color) !important;
+        }
+        
+        .navbar-brand span {
+            color: var(--primary-color);
+        }
+        
+        .nav-link {
+            color: var(--light-color) !important;
+            font-weight: 500;
+            margin: 0 10px;
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .nav-link.active::after {
+            width: 100%;
+        }
+        
+        .breadcrumb {
+            background: transparent;
+            justify-content: center;
+        }
+        
+        .breadcrumb-item a {
+            color: var(--light-color);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .breadcrumb-item a:hover {
+            color: var(--primary-color);
+        }
+        
+        .breadcrumb-item.active {
+            color: var(--primary-color);
+        }
+        
+        .breadcrumb-item+.breadcrumb-item::before {
+            color: var(--light-color);
+        }
+        
+        /* Activities Section */
+        .activities-section {
+            position: relative;
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(90deg, var(--primary-color), var(--neon-pink), var(--primary-color));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-shift 3s linear infinite;
+        }
+        
+        .section-title::after {
+            content:'';
+            position: absolute;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--neon-pink));
+            bottom: -10px;
+            left: 0;
+            border-radius: 2px;
+            filter: drop-shadow(0 0 5px var(--primary-color));
+        }
+
+        .sub-heading {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            position: relative;
+            display: inline-block;
+            background: linear-gradient(90deg, var(--primary-color), var(--neon-blue));
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradient-shift 3s linear infinite;
+        }
+        
+        /* Flip Card Styles */
+        .flip-card {
+            background: transparent;
+            width: 450px;
+            height: 500px;
+            perspective: 1000px;
+            margin: 0 auto 32px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            box-shadow: 0 4px 24px rgba(81, 71, 255, 0.3);
+            transform-style: preserve-3d;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s;
+            opacity: 0;
+            transform: translateY(20px);
+            cursor: pointer;
+        }
+
+        .flip-card[data-aos="fade-up"].aos-animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s cubic-bezier(0.4,0,0.2,1);
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front, .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 24px 16px;
+            text-align: center;
+            border: 2px solid transparent;
+            background: linear-gradient(135deg, #1e1e24 10%, #050505 60%) padding-box,
+                        linear-gradient(135deg, var(--primary-color), var(--neon-pink)) border-box;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .light-mode .flip-card-front,
+        .light-mode .flip-card-back {
+            background: linear-gradient(135deg, #f0f0f0 10%, #e0e0e0 60%) padding-box,
+                        linear-gradient(135deg, var(--primary-color), var(--neon-pink)) border-box;
+            color: #333;
+        }
+
+        .flip-card-front .activity-icon {
+            font-size: 3rem;
+            color: #d3a410;
+            margin-bottom: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .flip-card-front h4 {
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .flip-card-back {
+            background: linear-gradient(135deg, #23233b 10%, #181824 60%) padding-box,
+                        linear-gradient(135deg, var(--primary-color), var(--neon-blue)) border-box;
+            color: #fff;
+            transform: rotateY(180deg);
+            padding: 24px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .light-mode .flip-card-back {
+            background: linear-gradient(135deg, #e0e0e0 10%, #d0d0d0 60%) padding-box,
+                        linear-gradient(135deg, var(--primary-color), var(--neon-blue)) border-box;
+            color: #333;
+        }
+
+        .flip-card-back .activity-date {
+            color: #d3a410;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .flip-card-back .activity-tag {
+            display: inline-block;
+            background-color: #333;
+            color: #d3a410;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .light-mode .flip-card-back .activity-tag {
+            background-color: #e0e0e0;
+        }
+
+        .flip-card-back .close-flip {
+            position: absolute;
+            top: 12px;
+            right: 18px;
+            font-size: 1.5rem;
+            color: #d3a410;
+            cursor: pointer;
+            z-index: 10;
+            transition: transform 0.3s ease;
+        }
+
+        .flip-card-back .close-flip:hover {
+            transform: scale(1.2);
+        }
+
+        /* Timeline Section */
+        .timeline-section {
+            position: relative;
+            padding: 80px 0;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary-color), var(--neon-pink));
+        }
+        
+        .timeline-item {
+            position: relative;
+            padding-bottom: 30px;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -38px;
+            top: 5px;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            border: 3px solid var(--dark-color);
+            box-shadow: 0 0 0 3px var(--primary-color);
+        }
+
+        .light-mode .timeline-item::before {
+            border: 3px solid var(--light-color);
+        }
+        
+        .timeline-date {
+            color: var(--primary-color);
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: inline-block;
+            background: rgba(108, 99, 255, 0.1);
+            padding: 3px 10px;
+            border-radius: 20px;
+        }
+        
+        /* Footer */
+        footer {
+            background: transparent;
+            padding: 30px 0;
+            text-align: center;
+            position: relative;
+            border-top: 1px solid rgba(108, 99, 255, 0.2);
+        }
+        
+        .footer-logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--light-color);
+            margin-bottom: 20px;
+        }
+        
+        .footer-logo span {
+            color: var(--primary-color);
+        }
+        
+        .footer-social a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(108, 99, 255, 0.1);
+            border-radius: 50%;
+            margin: 0 10px;
+            color: var(--light-color);
+            transition: all 0.3s ease;
+        }
+        
+        .footer-social a:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(108, 99, 255, 0.4);
+        }
+        
+        .footer-links {
+            margin: 20px 0;
+        }
+        
+        .footer-links a {
+            color: var(--light-color);
+            margin: 0 15px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .light-mode .copyright {
+            color: rgba(0, 0, 0, 0.5);
+        }
+        
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(108, 99, 255, 0.4);
+            border: none;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Dark/Light Mode Toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: rgba(108, 99, 255, 0.2);
+            backdrop-filter: blur(5px);
+            color: var(--light-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            z-index: 99;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .theme-toggle:hover {
+            background-color: var(--primary-color);
+            transform: rotate(30deg);
+        }
+
+        /* Music Control Button Styles */
+        .music-control-header-container {
+            position: fixed;
+            top: 40px;
+            right: 40px;
+            z-index: 1000;
+            border-radius: 12px;
+            background: linear-gradient(145deg, #0a0f3d, #1e202c);
+            box-shadow: 5px 5px 10px #1c1e28, -5px -5px 10px #303442;
+            transition: all 0.3s ease;
+        }
+
+        .light-mode .music-control-header-container {
+            background: linear-gradient(145deg, #e0e0e0, #f5f5f5);
+            box-shadow: 5px 5px 10px #d0d0d0, -5px -5px 10px #ffffff;
+        }
+
+        .music-control {
+            color: #0a84ff;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            transition: background 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.3s, box-shadow 0.3s, transform 0.2s ease-out;
+            border: none;
+            background: transparent;
+            border-radius: 12px;
+        }
+
+        .light-mode .music-control {
+            color: var(--primary-color);
+        }
+
+        .music-control.playing {
+            box-shadow: 5px 5px 10px #0a0f3d, -5px -5px 10px #1e202c, inset 0 0 10px rgba(10, 132, 255, 0.5), 0 0 20px rgba(10, 132, 255, 0.7);
+        }
+
+        .light-mode .music-control.playing {
+            box-shadow: 5px 5px 10px #d0d0d0, -5px -5px 10px #ffffff, inset 0 0 10px rgba(108, 99, 255, 0.5), 0 0 20px rgba(108, 99, 255, 0.4);
+        }
+
+        .music-control:hover {
+            background: linear-gradient(145deg, #1e202c, #2a2d3e);
+            color: #bb86fc;
+            transform: scale(1.05);
+            box-shadow: 3px 3px 8px #1c1e28, -3px -3px 8px #303442, inset 2px 2px 4px rgba(3, 218, 198, 0.3), 0 0 15px rgba(187, 134, 252, 0.5);
+        }
+
+        .light-mode .music-control:hover {
+            background: linear-gradient(145deg, #f0f0f0, #e0e0e0);
+            color: var(--primary-color);
+            box-shadow: 3px 3px 8px #d0d0d0, -3px -3px 8px #ffffff, inset 2px 2px 4px rgba(108, 99, 255, 0.3), 0 0 15px rgba(108, 99, 255, 0.4);
+        }
+
+        .music-control .icon-container i {
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        .music-control .music-bars-container {
+            display: none;
+        }
+
+        .music-control.playing .music-bars-container {
+            display: flex;
+        }
+
+        /* Confetti Button */
+        .confetti-btn {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--neon-pink);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            z-index: 99;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        .confetti-btn:hover {
+            transform: scale(1.1);
+            background-color: #ff4757;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 1200px) {
+            .flip-card {
+                width: 380px;
+                height: 450px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .page-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .flip-card {
+                width: 320px;
+                height: 400px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .page-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+            
+            .activities-section {
+                padding: 60px 0;
+            }
+
+            .flip-card {
+                width: 280px;
+                height: 380px;
+            }
+
+            .music-control-header-container {
+                top: 20px;
+                right: 20px;
+            }
+
+            .theme-toggle {
+                bottom: 20px;
+                left: 20px;
+            }
+
+            .confetti-btn {
+                bottom: 90px;
+                right: 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .page-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            body {
+                padding: 0 10px;
+            }
+
+            .flip-card {
+                width: 100%;
+                height: 350px;
+                max-width: 300px;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .sub-heading {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes gradient-shift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.05);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Fix card layout and stacking */
+        .activities-section .row.g-4 {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 32px 34px;
+        }
+
+        .activities-section .container {
+            max-width: 1400px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Flip hint animation */
+        .flip-hint {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+            animation: pulse 2s infinite;
+            display: flex;
+            align-items: center;
+        }
+
+        .light-mode .flip-hint {
+            color: rgba(0, 0, 0, 0.7);
+        }
+
+        .flip-hint i {
+            margin-right: 5px;
+        }
+
+        /* Fallback: अगर AOS काम न करे तो cards दिखें */
+        .flip-card { opacity: 1 !important; transform: none !important; }
+    </style>
+</head>
+<body>
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+    
+    <!-- Overlay -->
+    <div class="overlay"></div>
+
+    <!-- Page Hero Section -->
+    <section class="page-hero">
+        <div class="container transparent">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h1 data-aos="fade-up">My <span class="text-primary">Activities</span></h1>
+                    <nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="100">
+                        <ol class="breadcrumb justify-content-center">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Activities</li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Activities Section -->
+    <section class="activities-section py-5">
+        <div class="container">
+
+            <!-- Section Heading -->
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center" data-aos="fade-up">
+                    <h2 class="section-title">Professional <span>Activities</span></h2>
+                    <p class="mb-4">My involvement in academic, technical and leadership activities</p>
+                </div>
+            </div>
+
+            <!-- Leadership & Organizational Roles -->
+            <div class="row">
+                <div class="col-12 text-center mb-4" data-aos="fade-up">
+                    <h3 class="sub-heading">Leadership & Organizational Roles</h3>
+                </div>
+            </div>
+            <div class="row g-4">
+                <!-- Activity Card 1 -->
+                <div class="col-lg-4 col-md-6">
+                    <div class="flip-card" data-aos="fade-up">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="activity-icon"><i class="fas fa-users"></i></div>
+                                <h4>AI in Agriculture FDP</h4>
+                                <div class="flip-hint">
+                                    <i class="fas fa-hand-pointer"></i> Click to flip
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <span class="close-flip">&times;</span>
+                                <div class="activity-icon" style="font-size:2.5rem;"><i class="fas fa-users"></i></div>
+                                <h4>AI in Agriculture FDP</h4>
+                                <span class="activity-date">Jan 2025</span>
+                                <span class="activity-tag">Coordinator</span>
+                                <p>Student Coordinator (Technical Committee) for a one-week FDP on AI in Agriculture with IIT Roorkee.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Card 2 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="activity-icon"><i class="fas fa-users"></i></div>
+                                <h4>AI in Environmental Biotech FDP</h4>
+                                <div class="flip-hint">
+                                    <i class="fas fa-hand-pointer"></i> Click to flip
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <span class="close-flip">&times;</span>
+                                <div class="activity-icon" style="font-size:2.5rem;"><i class="fas fa-users"></i></div>
+                                <h4>AI in Environmental Biotech FDP</h4>
+                                <span class="activity-date">Feb 2025</span>
+                                <span class="activity-tag">Coordinator</span>
+                                <p>Student Coordinator (Technical Committee) for a one-week FDP on AI in Environmental Biotech with IIT Guwahati.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Card 3 -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="activity-icon"><i class="fas fa-users"></i></div>
+                                <h4>Sustainable Resource Management FDP</h4>
+                                <div class="flip-hint">
+                                    <i class="fas fa-hand-pointer"></i> Click to flip
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <span class="close-flip">&times;</span>
+                                <div class="activity-icon" style="font-size:2.5rem;"><i class="fas fa-users"></i></div>
+                                <h4>Sustainable Resource Management FDP</h4>
+                                <span class="activity-date">Mar 2025</span>
+                                <span class="activity-tag">Coordinator</span>
+                                <p>Student Coordinator (Technical Committee) for a one-week FDP on Sustainable Resource Management with IIT Roorkee.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- More Activity Cards -->
+                <div class="col-lg-4 col-md-6" data-aos="fade-up">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="activity-icon"><i class="fas fa-medal"></i></div>
+                                <h4>International Cancer Summit</h4>
+                                <div class="flip-hint">
+                                    <i class="fas fa-hand-pointer"></i> Click to flip
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <span class="close-flip">&times;</span>
+                                <div class="activity-icon" style="font-size:2.5rem;"><i class="fas fa-medal"></i></div>
+                                <h4>International Cancer Summit</h4>
+                                <span class="activity-date">Feb 2025</span>
+                                <span class="activity-tag">Participant</span>
+                                <p>Participated in the International Cancer Summit jointly organized by ICPC (International Cancer Patient Coalition) and SHUATS at University campus, Prayagraj and gained various insights about Cancer and its treatment. Also developed a Machine Learning Model to predict the type of Cancer. Currently working on an International Cancer Prediction Model Development Project.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="activity-icon"><i class="fab fa-google"></i></div>
+                                <h4>Google Devfest</h4>
+                                <div class="flip-hint">
+                                    <i class="fas fa-hand-pointer"></i> Click to flip
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <span class="close-flip">&times;</span>
+                                <div class="activity-icon" style="font-size:2.5rem;"><i class="fab fa-google"></i></div>
+                                <h4>Google Devfest</h4>
+                                <span class="activity-date">Dec 2023</span>
+                                <span class="activity-tag">Participant</span>
+                                <p>Participated in Google Devfest and gained various insights about Google's latest technologies including AI/ML, Cloud, and Web Development.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flip-card">
+                        <div class="flip-card-inner">
+                            <div class="flip-card-front">
+                                <div class="activity-icon"><i class="fas fa-university"></i></div>
+                                <h4>University Events</h4>
+                                <div class="flip-hint">
+                                    <i class="fas fa-hand-pointer"></i> Click to flip
+                                </div>
+                            </div>
+                            <div class="flip-card-back">
+                                <span class="close-flip">&times;</span>
+                                <div class="activity-icon" style="font-size:2.5rem;"><i class="fas fa-university"></i></div>
+                                <h4>University Events</h4>
+                                <span class="activity-date">2022-2025</span>
+                                <span class="activity-tag">Participant</span>
+                                <p>Organized, Coordinated and participated in various university-level events (like XPressions 2022, Tech-Fest 2023, XPressions 2023, Kritagyata Mahotsav 2024, Quiz Competitions, Foof Fests 2022 & 2023, and many other such events).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technical & Hackathon Achievements -->
+            <div class="row mt-5">
+                <div class="col-12 text-center mb-4" data-aos="fade-up">
+                    <h3 class="sub-heading">Technical & Hackathon Achievements</h3>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Cards -->
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up">
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <div class="activity-icon"><i class="fab fa-github"></i></div>
+                                    <h4>GitHub Pull Shark</h4>
+                                    <div class="flip-hint">
+                                        <i class="fas fa-hand-pointer"></i> Click to flip
+                                    </div>
+                                </div>
+                                <div class="flip-card-back">
+                                    <span class="close-flip">&times;</span>
+                                    <div class="activity-icon" style="font-size:2.5rem;"><i class="fab fa-github"></i></div>
+                                    <h4>GitHub Pull Shark</h4>
+                                    <span class="activity-date">Oct 2024</span>
+                                    <span class="activity-tag">Achievement</span>
+                                    <p>Earned GitHub Pull Shark achievement for open source contributions in Hacktoberfest 2024.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <div class="activity-icon"><i class="fas fa-code"></i></div>
+                                    <h4>Hacktoberfest</h4>
+                                    <div class="flip-hint">
+                                        <i class="fas fa-hand-pointer"></i> Click to flip
+                                    </div>
+                                </div>
+                                <div class="flip-card-back">
+                                    <span class="close-flip">&times;</span>
+                                    <div class="activity-icon" style="font-size:2.5rem;"><i class="fas fa-code"></i></div>
+                                    <h4>Hacktoberfest</h4>
+                                    <span class="activity-date">Oct 2024</span>
+                                    <span class="activity-tag">Participation</span>
+                                    <p>Participated in Hacktoberfest and successfully completed 4 pull requests.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <div class="activity-icon"><i class="fas fa-trophy"></i></div>
+                                    <h4>Project Exhibition</h4>
+                                    <div class="flip-hint">
+                                        <i class="fas fa-hand-pointer"></i> Click to flip
+                                    </div>
+                                </div>
+                                <div class="flip-card-back">
+                                    <span class="close-flip">&times;</span>
+                                    <div class="activity-icon" style="font-size:2.5rem;"><i class="fas fa-trophy"></i></div>
+                                    <h4>Project Exhibition</h4>
+                                    <span class="activity-date">Apr 2023</span>
+                                    <span class="activity-tag">Participation</span>
+                                    <p>Participated in a project exhibition and won the second position.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <div class="activity-icon"><i class="fas fa-trophy"></i></div>
+                                    <h4>Science Quiz</h4>
+                                    <div class="flip-hint">
+                                        <i class="fas fa-hand-pointer"></i> Click to flip
+                                    </div>
+                                </div>
+                                <div class="flip-card-back">
+                                    <span class="close-flip">&times;</span>
+                                    <div class="activity-icon" style="font-size:2.5rem;"><i class="fas fa-trophy"></i></div>
+                                    <h4>Science Quiz</h4>
+                                    <span class="activity-date">Feb 2023</span>
+                                    <span class="activity-tag">Winner</span>
+                                    <p>Won 1st Prize in Science Quiz Competition by CSI on National Science Day.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <div class="activity-icon"><i class="fas fa-trophy"></i></div>
+                                    <h4>Quiz Competition</h4>
+                                    <div class="flip-hint">
+                                        <i class="fas fa-hand-pointer"></i> Click to flip
+                                    </div>
+                                </div>
+                                <div class="flip-card-back">
+                                    <span class="close-flip">&times;</span>
+                                    <div class="activity-icon" style="font-size:2.5rem;"><i class="fas fa-trophy"></i></div>
+                                    <h4>Quiz Competition</h4>
+                                    <span class="activity-date">Feb 2024</span>
+                                    <span class="activity-tag">Participation</span>
+                                    <p>Participated in a quiz competition and won the second position.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Community & Other Achievements -->
+            <div class="row mt-5">
+                <div class="col-12 text-center mb-4" data-aos="fade-up">
+                    <h3 class="sub-heading">Community & Other Achievements</h3>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Cards -->
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up">
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <div class="activity-icon"><i class="fas fa-award"></i></div>
+                                    <h4>Corona Warrior</h4>
+                                    <div class="flip-hint">
+                                        <i class="fas fa-hand-pointer"></i> Click to flip
+                                    </div>
+                                </div>
+                                <div class="flip-card-back">
+                                    <span class="close-flip">&times;</span>
+                                    <div class="activity-icon" style="font-size:2.5rem;"><i class="fas fa-award"></i></div>
+                                    <h4>Corona Warrior</h4>
+                                    <span class="activity-date">Aug 2021</span>
+                                    <span class="activity-tag">Recognition</span>
+                                    <p>Recognized for contributions during COVID-19 pandemic by Sardar Patel Legal Aid and Awareness Society.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="100">
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <div class="activity-icon"><i class="fas fa-futbol"></i></div>
+                                    <h4>Football Player</h4>
+                                    <div class="flip-hint">
+                                        <i class="fas fa-hand-pointer"></i> Click to flip
+                                    </div>
+                                </div>
+                                <div class="flip-card-back">
+                                    <span class="close-flip">&times;</span>
+                                    <div class="activity-icon" style="font-size:2.5rem;"><i class="fas fa-futbol"></i></div>
+                                    <h4>Football Player</h4>
+                                    <span class="activity-date">2018-2022</span>
+                                    <span class="activity-tag">Participation</span>
+                                    <p>Played football as a midfielder and won the title of "Best Player" in a District Level Football Tournament.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <div class="activity-icon"><i class="fas fa-utensils"></i></div>
+                                    <h4>Food Fest</h4>
+                                    <div class="flip-hint">
+                                        <i class="fas fa-hand-pointer"></i> Click to flip
+                                    </div>
+                                </div>
+                                <div class="flip-card-back">
+                                    <span class="close-flip">&times;</span>
+                                    <div class="activity-icon" style="font-size:2.5rem;"><i class="fas fa-utensils"></i></div>
+                                    <h4>Food Fest</h4>
+                                    <span class="activity-date">Oct 2023</span>
+                                    <span class="activity-tag">Participation</span>
+                                    <p>Actively Organized and Coordinated and participated in a food fest.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <div class="activity-icon"><i class="fas fa-music"></i></div>
+                                    <h4>Band Performance</h4>
+                                    <div class="flip-hint">
+                                        <i class="fas fa-hand-pointer"></i> Click to flip
+                                    </div>
+                                </div>
+                                <div class="flip-card-back">
+                                    <span class="close-flip">&times;</span>
+                                    <div class="activity-icon" style="font-size:2.5rem;"><i class="fas fa-music"></i></div>
+                                    <h4>Band Performance</h4>
+                                    <span class="activity-date">Mar 2023</span>
+                                    <span class="activity-tag">Participation</span>
+                                    <p>Performed in a band and won the title of "Best Band" in a college fest.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <div class="activity-icon"><i class="fas fa-graduation-cap"></i></div>
+                                    <h4>Internshala Partner</h4>
+                                    <div class="flip-hint">
+                                        <i class="fas fa-hand-pointer"></i> Click to flip
+                                    </div>
+                                </div>
+                                <div class="flip-card-back">
+                                    <span class="close-flip">&times;</span>
+                                    <div class="activity-icon" style="font-size:2.5rem;"><i class="fas fa-graduation-cap"></i></div>
+                                    <h4>Internshala Partner</h4>
+                                    <span class="activity-date">2023</span>
+                                    <span class="activity-tag">Participation</span>
+                                    <p>Became an Internshala Student Partner in my University.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    <div class="activity-icon"><i class="fas fa-robot"></i></div>
+                                    <h4>Robotics & AI</h4>
+                                    <div class="flip-hint">
+                                        <i class="fas fa-hand-pointer"></i> Click to flip
+                                    </div>
+                                </div>
+                                <div class="flip-card-back">
+                                    <span class="close-flip">&times;</span>
+                                    <div class="activity-icon" style="font-size:2.5rem;"><i class="fas fa-robot"></i></div>
+                                    <h4>Robotics & AI</h4>
+                                    <span class="activity-date">Nov 2022</span>
+                                    <span class="activity-tag">Participation</span>
+                                    <p>Participated in robotics and AI-related Hands-on Workshop at IIIT Allahabad.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="timeline-section py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="mb-4" data-aos="fade-up" style="text-align: center; background: linear-gradient(90deg, var(--primary-color), var(--neon-pink)); -webkit-background-clip: text; background-clip: text; color: transparent;">Achievements Timeline</h3>
+                    
+                    <div class="timeline" data-aos="fade-up">
+                        <div class="timeline-item mb-5">
+                            <div class="timeline-date fw-bold mb-2">2025</div>
+                            <h4 class="mb-1">Faculty Development Program Coordinator</h4>
+                            <p>Coordinated multiple FDPs in collaboration with IIT Roorkee and IIT Guwahati on AI and sustainable technologies.</p>
+                        </div>
+                        
+                        <div class="timeline-item mb-5">
+                            <div class="timeline-date fw-bold mb-2">2024</div>
+                            <h4 class="mb-1">GitHub Pull Shark</h4>
+                            <p>Earned GitHub Pull Shark achievement for open source contributions.</p>
+                        </div>
+                        
+                        <div class="timeline-item mb-5">
+                            <div class="timeline-date fw-bold mb-2">2022-2025</div>
+                            <h4 class="mb-1">University Event Coordinator</h4>
+                            <p>Coordinated multiple university-level events including Kritagyata Mahotsav and Research Methodology Workshop.</p>
+                        </div>
+                        
+                        <div class="timeline-item mb-5">
+                            <div class="timeline-date fw-bold mb-2">2023</div>
+                            <h4 class="mb-1">Google Devfest Coordinator</h4>
+                            <p>Served as Student Coordinator for Google Devfest organized by Google Developers Group, Prayagraj.</p>
+                        </div>
+                        
+                        <div class="timeline-item mb-5">
+                            <div class="timeline-date fw-bold mb-2">2023</div>
+                            <h4 class="mb-1">Science Quiz Winner</h4>
+                            <p>Won 1st Prize in Science Quiz Competition by CSI on National Science Day.</p>
+                        </div>
+                        
+                        <div class="timeline-item mb-0">
+                            <div class="timeline-date fw-bold mb-2">2021</div>
+                            <h4 class="mb-1">Corona Warrior Award</h4>
+                            <p>Recognized for contributions during COVID-19 pandemic by Sardar Patel Legal Aid and Awareness Society.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <div class="footer-logo">Himan<span>shu</span></div>
+                    <div class="footer-social">
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-dribbble"></i></a>
+                    </div>
+                    <div class="footer-links">
+                        <a href="index.html">Home</a>
+                        <a href="#">About</a>
+                        <a href="#">Projects</a>
+                        <a href="#">Contact</a>
+                    </div>
+                    <div class="copyright">
+                        &copy; 2025 Himanshu. All Rights Reserved.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <!-- Confetti Button -->
+    <button class="confetti-btn" id="confettiBtn" aria-label="Trigger confetti">
+        <i class="fas fa-party-horn"></i>
+    </button>
+    
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Particles JS -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    
+    <!-- Background Music Player -->
+    <audio id="background-music" preload="auto" loop>
+        <source src="assets/music/activities_bg_audio.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+    <!-- Music Control Button -->
+    <div class="music-control-header-container">
+        <button id="music-control-btn" class="music-control" aria-label="Play background music">
+            <div class="icon-container">
+                <i class="fas fa-play"></i>
+            </div>
+            <div class="music-bars-container">
+                <span></span><span></span><span></span><span></span>
+            </div>
+        </button>
+    </div>
+
+    <script>
+        // Initialize AOS Animation with staggered delays
+        AOS.init({
+            duration: 800,
+            once: true,
+            easing: 'ease-out-back',
+            delay: 100
+        });
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
+        });
+
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Music Player Control
+        document.addEventListener('DOMContentLoaded', function() {
+            const musicControlBtn = document.getElementById('music-control-btn');
+            const backgroundMusic = document.getElementById('background-music');
+            const musicControlIcon = musicControlBtn.querySelector('.icon-container i');
+
+            // Set initial volume
+            backgroundMusic.volume = 0.3;
+
+            function updateButtonState() {
+                if (backgroundMusic.paused) {
+                    musicControlBtn.classList.remove('playing');
+                    musicControlIcon.classList.remove('fa-pause');
+                    musicControlIcon.classList.add('fa-play');
+                    musicControlBtn.setAttribute('aria-label', 'Play background music');
+                } else {
+                    musicControlBtn.classList.add('playing');
+                    musicControlIcon.classList.remove('fa-play');
+                    musicControlIcon.classList.add('fa-pause');
+                    musicControlBtn.setAttribute('aria-label', 'Pause background music');
+                }
+            }
+
+            musicControlBtn.addEventListener('click', function() {
+                if (backgroundMusic.paused) {
+                    backgroundMusic.play().then(() => {
+                        updateButtonState();
+                    }).catch(error => {
+                        console.log("Playback failed:", error);
+                    });
+                } else {
+                    let fadeAudio = setInterval(() => {
+                        if (backgroundMusic.volume > 0.1) {
+                            backgroundMusic.volume -= 0.1;
+                        } else {
+                            clearInterval(fadeAudio);
+                            backgroundMusic.pause();
+                            backgroundMusic.volume = 0.3;
+                            updateButtonState();
+                        }
+                    }, 100);
+                }
+            });
+
+            backgroundMusic.addEventListener('play', updateButtonState);
+            backgroundMusic.addEventListener('pause', updateButtonState);
+        });
+
+        // Flip Card Logic with 3D Tilt
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.flip-card');
+
+            cards.forEach(function(card) {
+                // Flip on click
+                card.addEventListener('click', function(e) {
+                    if (!e.target.classList.contains('close-flip')) {
+                        card.classList.toggle('flipped');
+                        // Play flip sound
+                        const flipSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-ui-interface-click-1131.mp3');
+                        flipSound.volume = 0.3;
+                        flipSound.play();
+                    }
+                });
+
+                // Close button
+                card.querySelector('.close-flip').addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    card.classList.remove('flipped');
+                });
+
+                // 3D Tilt Effect
+                card.addEventListener('mousemove', (e) => {
+                    if (!card.classList.contains('flipped')) {
+                        const xAxis = (window.innerWidth / 2 - e.pageX) / 15;
+                        const yAxis = (window.innerHeight / 2 - e.pageY) / 15;
+                        card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+                    }
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    if (!card.classList.contains('flipped')) {
+                        card.style.transform = 'rotateY(0) rotateX(0)';
+                    }
+                });
+            });
+        });
+
+        // Initialize Particles.js
+        document.addEventListener('DOMContentLoaded', function() {
+            particlesJS("particles-js", {
+                "particles": {
+                    "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                    "color": { "value": "#6c63ff" },
+                    "shape": { "type": "circle" },
+                    "opacity": { "value": 0.5, "random": true },
+                    "size": { "value": 3, "random": true },
+                    "line_linked": { "enable": true, "distance": 150, "color": "#6c63ff", "opacity": 0.3, "width": 1 },
+                    "move": { "enable": true, "speed": 2, "direction": "none", "out_mode": "out" }
+                },
+                "interactivity": {
+                    "events": {
+                        "onhover": { "enable": true, "mode": "repulse" }
+                    }
+                }
+            });
+        });
+
+        // Theme Toggle (Dark/Light Mode)
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('light-mode');
+            
+            if (document.body.classList.contains('light-mode')) {
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+                themeToggle.setAttribute('aria-label', 'Switch to dark mode');
+            } else {
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+                themeToggle.setAttribute('aria-label', 'Switch to light mode');
+            }
+        });
+
+        // Confetti Button
+        const confettiBtn = document.getElementById('confettiBtn');
+        confettiBtn.addEventListener('click', () => {
+            confetti({
+                particleCount: 150,
+                spread: 70,
+                origin: { y: 0.6 },
+                colors: ['#6c63ff', '#ff6b6b', '#0af', '#d3a410']
+            });
+            
+            // Play celebration sound
+            const confettiSound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-achievement-bell-600.mp3');
+            confettiSound.volume = 0.3;
+            confettiSound.play();
+        });
+
+        // Adjust card layout based on inputs
+        const section = document.querySelector('.activities-section .container');
+        const cards = document.querySelectorAll('.activities-section .flip-card');
+        const widthInput = document.getElementById('section-width-input');
+        const cardsPerRowInput = document.getElementById('cards-per-row-input');
+
+        function updateLayout() {
+            const sectionWidth = parseInt(widthInput.value, 10);
+            section.style.maxWidth = sectionWidth + 'px';
+            section.style.minWidth = sectionWidth + 'px';
+            section.style.width = sectionWidth + 'px';
+            
+            const cardsPerRow = parseInt(cardsPerRowInput.value, 10);
+            const gap = 34;
+            const cardWidth = Math.floor((sectionWidth - (cardsPerRow - 1) * gap) / cardsPerRow);
+            
+            cards.forEach(card => {
+                card.style.width = cardWidth + 'px';
+                card.style.height = (cardWidth * 1.1) + 'px'; // Maintain aspect ratio
+            });
+        }
+
+        if (widthInput && cardsPerRowInput) {
+            widthInput.addEventListener('input', updateLayout);
+            cardsPerRowInput.addEventListener('input', updateLayout);
+            updateLayout();
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,917 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Professional Certifications</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
+        
+        :root {
+            --primary: #4f46e5;
+            --secondary: #10b981;
+            --dark: #1e293b;
+            --light: #f8fafc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(120deg, #2e0549 0%, #a1c4fd80 50%, #012202 100%);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Canvas */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 3rem 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header {
+        text-align: center; /* Center the content within the header */
+        }
+
+        h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(to right, #4f46e5, #03ec9e, #6b16a4, #a1c4fd80, #03cd0a);
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        font-weight: 800;
+        opacity: 0; /* Initially hidden */
+        transform: scale(0.5); /* Start small */
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .animated-title {
+        animation: popIn 5s forwards cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        font-family: "Limelight", sans-serif;
+        font-weight: 700;
+        font-style: normal;
+        }
+
+        @keyframes popIn {
+        0% {
+            opacity: 0;
+            transform: scale(0.5);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1);
+        }
+        }
+
+        p.subtitle {
+        /* Add some styling to the subtitle if you want */
+        font-size: 1.1rem;
+        color: #440447;
+        padding-top: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+            padding-top: 40px;
+        }
+
+        /* Container for the music button in the header for centering */
+        .music-control-header-container {
+            text-align: center; /* Centers the inline-flex button */
+            margin-top: 25px; /* Space above the button */
+        }
+
+        /* Certifications Grid */
+        .certifications {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 7rem;
+            padding: 4rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .card {
+            width: 480px;
+            height: 40rem;
+            background: #6d9cb4;
+            position: relative;
+            display: flex;
+            place-content: center;
+            place-items: center;
+            overflow: hidden;
+            border-radius: 20px;
+            margin: 0 auto;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgb(0, 76, 208);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.1);
+            border: 2px solid rgba(244, 1, 1, 0.926);
+        }
+        .card:hover {
+            transform: scale(1.045) translateY(-8px);
+            box-shadow: 0 0 32px 8px #70a6eee7, 0 10px 30px rgb(197, 135, 241);
+            border-color: #fe0138;
+            background: linear-gradient(120deg, #4ca1cc 60%, #8569d122 100%);
+            z-index: 2;
+        }
+        .card h2, .card .cert-title {
+            z-index: 1;
+            color: white;
+            font-size: 1.1em;
+            text-align: center;
+            margin-bottom: 0.7em;
+            margin-top: 0.2em;
+            font-weight: 700;
+        }
+        .card .cert-badge {
+            z-index: 1;
+            margin-bottom: 0.5em;
+            font-size: 0.9em;
+            background: #1a1a1a;
+            color: #fff;
+            border-radius: 12px;
+            padding: 0.2em 0.8em;
+            display: inline-block;
+            font-weight: 600;
+        }
+        .card .cert-issuer {
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 0.5em;
+            padding-top: 40px;
+        }
+        .card .cert-issuer img {
+            width: 82px;
+            height: 82px;
+            border-radius: 50%;
+            margin-right: 8px;
+            object-fit: cover;
+            border: 2px solid rgba(1, 236, 253, 0.947);
+        }
+        .card .issuer-info {
+            flex: 1;
+            color: #fff;
+            font-size: 1.85em;
+            text-align: left;
+        }
+        .card .issuer-name {
+            font-weight: 600;
+            color: #00b7ff;
+            display: block;
+            font-size: 0.9em;
+        }
+        .card .cert-date {
+            font-size: 0.8em;
+            opacity: 0.8;
+            color: #fff;
+        }
+        .card .cert-buttons {
+            margin-top: auto;
+            display: flex;
+            justify-content: center;
+            gap: 1.5em;
+            padding-top: 40px;
+        }
+        .card .btn-view, .card .btn-download {
+            padding: 8px 18px;
+            border: none;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 20px;
+            font-size: 15px;
+            display: inline-flex;
+            align-items: center;
+            gap: 18px;
+            background: linear-gradient(90deg, #00b7ff, #7c4dff);
+            color: #fff;
+            box-shadow: 0 2px 8px #7c4dff44;
+            transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+        }
+        .card .btn-view:hover, .card .btn-download:hover {
+            background: linear-gradient(90deg, #ff30ff, #00b7ff);
+            color: #fff;
+            box-shadow: 0 4px 16px #ff30ff44;
+        }
+        .card::before {
+            content: '';
+            position: absolute;
+            width: 100px;
+            background-image: linear-gradient(180deg, rgb(0, 183, 255), rgb(255, 48, 255));
+            height: 130%;
+            animation: rotBGimg 3s linear infinite;
+            transition: all 0.2s linear;
+        }
+        @keyframes rotBGimg {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .card::after {
+            content: '';
+            position: absolute;
+            background: #1a3963;
+            inset: 5px;
+            border-radius: 15px;
+            z-index: 1;
+        }
+
+        /* Floating animation for cards */
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .cert-card:nth-child(odd) {
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .cert-card:nth-child(even) {
+            animation: float 8s ease-in-out infinite 1s;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .certifications {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .cert-buttons {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .btn-view, .btn-download {
+                width: 100%;
+            }
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem; /* Adjusted padding for smaller screens */
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative; /* Ensure footer is above particles if they overlap */
+            z-index: 1;
+        }
+
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 999;
+            background: rgba(40, 42, 54, 0.5); /* Slightly darker, more modern feel */
+            color: #39af99;
+            padding: 10px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .back-button:hover {
+            background-color: rgba(40, 42, 54, 0.7);
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 6px 15px rgba(32, 158, 183, 0.3);
+        }
+
+        .back-button i {
+            margin-right: 5px;
+        }
+
+        /* Music Control Button */
+        .music-control {
+            /* Removed fixed/absolute positioning, will be in normal flow */
+            /* z-index: 1000; still good if overlaps might occur, but less likely now */
+            display: inline-flex; /* Allows margin auto for centering if wrapped, and aligns internal items */
+            margin: 0 auto; /* Centering if its parent is text-align: center */
+            background: linear-gradient(145deg, #2a2d3e, #1e202c);
+            color: #03dac6; /* Brighter teal for icon */
+            border: none;
+            border-radius: 12px; /* Squarish with rounded corners */
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), color 0.3s, box-shadow 0.3s, transform 0.2s ease-out;
+            font-size: 18px; /* Slightly larger icon */
+            box-shadow: 
+                5px 5px 10px #1c1e28, /* Darker shadow */
+                -5px -5px 10px #303442, /* Lighter highlight for neumorphic feel */
+                inset 0 0 0px rgba(3, 218, 198, 0); /* Initial inset shadow for transition */
+        }
+
+        .music-control:hover {
+            background: linear-gradient(145deg, #1e202c, #2a2d3e);
+            color: #bb86fc; /* Purple on hover */
+            transform: scale(1.05);
+            box-shadow: 
+                3px 3px 8px #1c1e28,
+                -3px -3px 8px #303442,
+                inset 2px 2px 4px rgba(3, 218, 198, 0.3), /* Inset glow */
+                0 0 15px rgba(187, 134, 252, 0.5); /* Outer glow */
+        }
+
+        .music-control.playing {
+            color: #03dac6;
+            /* Removed pulsePlaying animation from the button itself, bars will animate */
+            box-shadow: 
+                5px 5px 10px #1c1e28,
+                -5px -5px 10px #303442,
+                inset 0 0 10px rgba(3, 218, 198, 0.5), /* Stronger inset glow when playing */
+                0 0 20px rgba(3, 218, 198, 0.7); /* Stronger outer glow */
+        }
+        
+        .music-control .icon-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .music-control .icon-container i {
+            transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55); 
+        }
+
+        .music-control .music-bars-container {
+            display: none; /* Hidden by default */
+            width: 24px; /* Adjust as needed */
+            height: 20px; /* Adjust as needed */
+            align-items: flex-end; /* Bars grow upwards */
+            justify-content: space-between;
+        }
+
+        .music-control .music-bars-container span {
+            width: 4px; /* Width of each bar */
+            height: 5px; /* Minimum height */
+            background-color: #03dac6; /* Bar color */
+            border-radius: 2px;
+            animation-duration: 0.8s;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+            animation-direction: alternate;
+        }
+
+        /* Show bars and hide icon when playing */
+        .music-control.playing .icon-container {
+            display: none;
+        }
+        .music-control.playing .music-bars-container {
+            display: flex;
+        }
+
+        .music-control.playing .music-bars-container span:nth-child(1) {
+            animation-name: musicBarDance;
+            animation-delay: 0s;
+        }
+        .music-control.playing .music-bars-container span:nth-child(2) {
+            animation-name: musicBarDance;
+            animation-delay: 0.15s;
+        }
+        .music-control.playing .music-bars-container span:nth-child(3) {
+            animation-name: musicBarDance;
+            animation-delay: 0.3s;
+        }
+        .music-control.playing .music-bars-container span:nth-child(4) {
+            animation-name: musicBarDance;
+            animation-delay: 0.45s;
+        }
+
+        @keyframes musicBarDance {
+            0%, 100% { height: 4px; opacity: 0.7; }
+            50% { height: 18px; opacity: 1; }
+        }
+
+
+        #particles-js {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100vw;
+          height: 100vh;
+          z-index: 0;
+          pointer-events: none;
+        }
+        header, .certifications {
+          position: relative;
+          z-index: 1;
+        }
+
+        .cert-title-hr {
+          width: 580px;
+          height: 5px;
+          margin: 0.5rem auto 2.5rem auto;
+          border: none;
+          border-radius: 3px;
+          background: linear-gradient(90deg, #0a0740, #014a31, #310350, #011940, #043005);
+          opacity: 0.85;
+          box-shadow: 0 2px 12px #4f46e544;
+        }
+
+        .cert-img {
+          width: calc(100% - 10px);
+          max-height: 180px;
+          object-fit: cover;
+          border-top-left-radius: 17px;
+          border-top-right-radius: 17px;
+          position: relative;
+          z-index: 2;
+          cursor: pointer;
+          margin-bottom: 0.7em;
+          margin-left: 5px;
+          margin-right: 5px;
+          box-sizing: border-box;
+          box-shadow: 0 2px 12px #0002;
+          transition: box-shadow 0.2s;
+        }
+        .cert-img:hover {
+          box-shadow: 0 4px 24px #7c4dff44;
+        }
+        .cert-img-modal-overlay {
+          display: none;
+          position: fixed;
+          top: 0; left: 0; right: 0; bottom: 0;
+          width: 100vw; height: 100vh;
+          background: rgba(44, 44, 62, 0.32);
+          z-index: 99999;
+          align-items: center;
+          justify-content: center;
+          backdrop-filter: blur(2px);
+          transition: background 0.3s;
+        }
+        .cert-img-modal-overlay.active {
+          display: flex;
+        }
+        .cert-img-modal-box {
+          background: rgba(255,255,255,0.98);
+          border-radius: 2rem;
+          box-shadow: 0 16px 64px 0 rgba(67, 97, 238, 0.18);
+          padding: 2.5rem 2.5rem 2rem 2.5rem;
+          min-width: 320px;
+          max-width: 95vw;
+          min-height: 220px;
+          max-height: 90vh;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          position: relative;
+          animation: popout 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+        .cert-img-modal-close {
+          position: absolute;
+          top: 1.2rem;
+          right: 1.5rem;
+          font-size: 2rem;
+          color: #ff1744;
+          cursor: pointer;
+          z-index: 2;
+          transition: color 0.2s;
+        }
+        .cert-img-modal-close:hover {
+          color: #7c4dff;
+        }
+        .cert-img-modal-img {
+          width: 100%;
+          max-width: 700px;
+          height: auto;
+          border-radius: 1.2rem;
+          box-shadow: 0 8px 32px 0 rgba(67, 97, 238, 0.12);
+        }
+
+        .card-content {
+          position: relative;
+          z-index: 3;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        /* Responsive adjustments for mobile screens */
+        @media (max-width: 576px) {
+            body {
+                padding: 0 10px;
+            }
+            .profile-photo-container {
+                margin-bottom: 2rem;
+            }
+            .profile-photo {
+                width: 280px;
+                height: 280px;
+            }
+            .hero-info-animated {
+                font-size: 1.1rem;
+            }
+            .highlights-section {
+                margin: 2rem 0;
+            }
+            .highlight-card {
+                padding: 1rem;
+                max-width: 280px;
+            }
+            .logo-modal-content {
+                max-width: 80vw;
+                max-height: 60vh;
+            }
+            .logo-modal-close {
+                top: 20px;
+                right: 30px;
+                font-size: 2.5rem;
+            }
+            .logo-modal-download {
+                padding: 0.6rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Music Player -->
+    <audio id="background-music" loop autoplay>
+        <source src="assets/music/index_bg_audio.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+
+   <!-- Back Button -->
+   <a href="javascript:history.back()" class="back-button">
+    <i class="fas fa-arrow-left"></i> Back
+  </a>
+    <!-- Particle.js Background -->
+    <div id="particles-js"></div>
+
+<header>
+  <h1 class="animated-title">My Certifications</h1>
+  <div class="cert-title-hr"></div>
+  <p class="subtitle">
+    Validated expertise and accomplishments through industry-recognized
+    certifications and specialized training programs.
+  </p>
+  <!-- Music Control Button - New Location -->
+  <div class="music-control-header-container">
+    <button id="music-control-btn" class="music-control" aria-label="Play or pause background music">
+        <div class="icon-container">
+            <i class="fas fa-pause"></i> <!-- Initial icon, JS will manage -->
+        </div>
+        <div class="music-bars-container">
+            <span></span><span></span><span></span><span></span>
+        </div>
+    </button>
+  </div>
+</header>
+
+    <div class="certifications">
+        <!-- Certification 1 -->
+        <div class="card">
+            <img class="cert-img" src="assets/NVIDIA-logo-BL.jpg" alt="Certificate Preview" />
+            <div class="card-content">
+                <div class="cert-badge"><i class="fas fa-award"></i> Certified</div>
+                <h3 class="cert-title">Fundamentals of Deep Learning</h3>
+                <div class="cert-desc">Short description about the certificate and issuer.</div>
+                <div class="cert-issuer">
+                    <img src="assets/NVIDIA-logo-BL.jpg" alt="Nvidia">
+                    <div class="issuer-info">
+                        <span class="issuer-name">Nvidia</span>
+                        <span class="cert-date">2025</span>
+                    </div>
+                </div>
+                <div class="cert-buttons">
+                    <a href="assets/certificates/" target="_blank" class="btn-view"><i class="fas fa-eye"></i> View</a>
+                </div>
+            </div>
+        </div>
+        <!-- Certification 2 -->
+        <div class="card">
+            <img class="cert-img" src="assets/certificates/AI Engineer-Certificate_page-0001.jpg" alt="Certificate Preview" />
+            <div class="card-content">
+                <div class="cert-badge"><i class="fas fa-award"></i> Certified</div>
+                <h3 class="cert-title">AI Engineer</h3>
+                <div class="cert-desc">Short description about the certificate and issuer.</div>
+                <div class="cert-issuer">
+                    <img src="assets/oneroadmap-logo.png" alt="Nvidia">
+                    <div class="issuer-info">
+                        <span class="issuer-name">oneroadmap</span>
+                        <span class="cert-date">2025</span>
+                    </div>
+                </div>
+                <div class="cert-buttons">
+                    <a href="assets/certificates/AI Engineer-Certificate_page-0001.jpg" target="_blank" class="btn-view"><i class="fas fa-eye"></i> View</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certification 3 -->
+        <div class="card">
+            <img class="cert-img" src="assets/certificates/React Native Certificate_pages-to-jpg-0001.jpg" alt="Certificate Preview" />
+            <div class="card-content">
+                <div class="cert-badge"><i class="fas fa-certificate"></i> Professional</div>
+                <h3 class="cert-title">Master React Native (React Native Cli Edition)</h3>
+                <div class="cert-desc">Short description about the certificate and issuer.</div>
+                <div class="cert-issuer">
+                    <img src="assets/Udemy New.png" alt="Udemy">
+                    <div class="issuer-info">
+                        <span class="issuer-name">Udemy</span>
+                        <span class="cert-date">2024</span>
+                    </div>
+                </div>
+                <div class="cert-buttons">
+                    <a href="assets/certificates/React Native Certificate_pages-to-jpg-0001.jpg" target="_blank" class="btn-view"><i class="fas fa-eye"></i> View</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certification 4 -->
+        <div class="card">
+            <img class="cert-img" src="assets/certificates/IoT workshop Techkriti'24.jpg" alt="Certificate Preview" />
+            <div class="card-content">
+                <div class="cert-badge"><i class="fas fa-wifi"></i> IoT</div>
+                <h3 class="cert-title">Google IoT Workshop</h3>
+                <div class="cert-desc">Short description about the certificate and issuer.</div>
+                <div class="cert-issuer">
+                    <img src="assets/google.png" alt="Google">
+                    <div class="issuer-info">
+                        <span class="issuer-name">TechKriti, IIT Kanpur</span>
+                        <span class="cert-date">2024</span>
+                    </div>
+                </div>
+                <div class="cert-buttons">
+                    <a href="assets/certificates/IoT workshop Techkriti'24.jpg" target="_blank" class="btn-view"><i class="fas fa-eye"></i> View</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certification 5 -->
+        <div class="card">
+            <img class="cert-img" src="assets/certificates/Data Science workshop Techkriti'24.jpg" alt="Certificate Preview" />
+            <div class="card-content">
+                <div class="cert-badge"><i class="fas fa-database"></i> Data</div>
+                <h3 class="cert-title">Data Science Workshop</h3>
+                <div class="cert-desc">Short description about the certificate and issuer.</div>
+                <div class="cert-issuer">
+                    <img src="assets/data_science.png" alt="Google">
+                    <div class="issuer-info">
+                        <span class="issuer-name">TechKriti, IIT Kanpur</span>
+                        <span class="cert-date">2024</span>
+                    </div>
+                </div>
+                <div class="cert-buttons">
+                    <a href="assets/certificates/Data Science workshop Techkriti'24.jpg" target="_blank" class="btn-view"><i class="fas fa-eye"></i> View</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certification 6 -->
+        <div class="card">
+            <img class="cert-img" src="assets/certificates/Java Programming workshop Techkriti'24.jpg" alt="Certificate Preview" />
+            <div class="card-content">
+                <div class="cert-badge"><i class="fab fa-java"></i> Programming</div>
+                <h3 class="cert-title">Java Programming Workshop</h3>
+                <div class="cert-desc">Short description about the certificate and issuer.</div>
+                <div class="cert-issuer">
+                    <img src="assets/java.png" alt="Google">
+                    <div class="issuer-info">
+                        <span class="issuer-name">TechKriti, IIT Kanpur</span>
+                        <span class="cert-date">2024</span>
+                    </div>
+                </div>
+                <div class="cert-buttons">
+                    <a href="assets/certificates/Java Programming workshop Techkriti'24.jpg" target="_blank" class="btn-view"><i class="fas fa-eye"></i> View</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certification 7 -->
+        <div class="card">
+            <img class="cert-img" src="assets/certificates/google cybersecurity_pages-to-jpg-0001.jpg" alt="Certificate Preview" />
+            <div class="card-content">
+                <div class="cert-badge"><i class="fas fa-shield-alt"></i> Security</div>
+                <h3 class="cert-title">Google Cybersecurity Fundamentals</h3>
+                <div class="cert-desc">Short description about the certificate and issuer.</div>
+                <div class="cert-issuer">
+                    <img src="assets/coursera-logo_brandlogos.net_8yqve.png" alt="Coursera">
+                    <div class="issuer-info">
+                        <span class="issuer-name">Coursera</span>
+                        <span class="cert-date">2023</span>
+                    </div>
+                </div>
+                <div class="cert-buttons">
+                    <a href="https://coursera.org/verify/MX7AR77N4ZDB" target="_blank" class="btn-view"><i class="fas fa-eye"></i> View</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certification 8 -->
+        <div class="card">
+            <img class="cert-img" src="https://images.unsplash.com/photo-1547658719-da2b51169166?auto=format&fit=crop&w=600&q=80" alt="Certificate Preview" />
+            <div class="card-content">
+                <div class="cert-badge"><i class="fas fa-file-powerpoint"></i> Office</div>
+                <h3 class="cert-title">Microsoft PowerPoint</h3>
+                <div class="cert-desc">Short description about the certificate and issuer.</div>
+                <div class="cert-issuer">
+                    <img src="assets/Microsoft_Logo_512px.png" alt="Microsoft">
+                    <div class="issuer-info">
+                        <span class="issuer-name">LinkedIn Skills Assessment</span>
+                        <span class="cert-date">2023</span>
+                    </div>
+                </div>
+                <div class="cert-buttons">
+                    <a href="#" target="_blank" class="btn-view"><i class="fas fa-eye"></i> View</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Certification 9 -->
+        <div class="card">
+            <img class="cert-img" src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=600&q=80" alt="Certificate Preview" />
+            <div class="card-content">
+                <div class="cert-badge"><i class="fas fa-flask"></i> Research</div>
+                <h3 class="cert-title">5-Days Research Methodology National Workshop</h3>
+                <div class="cert-desc">Short description about the certificate and issuer.</div>
+                <div class="cert-issuer">
+                    <img src="assets/SHIATS_LOGO.png" alt="SHUATS">
+                    <div class="issuer-info">
+                        <span class="issuer-name">SHUATS</span>
+                        <span class="cert-date">2024</span>
+                    </div>
+                </div>
+                <div class="cert-buttons">
+                    <a href="#" target="_blank" class="btn-view"><i class="fas fa-eye"></i> View</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 My Professional Portfolio. All certifications are verified.</p>
+    </footer>
+
+    <!-- Certificate Image Modal -->
+    <div id="cert-img-modal" class="cert-img-modal-overlay">
+      <div class="cert-img-modal-box">
+        <span id="cert-img-modal-close" class="cert-img-modal-close">&times;</span>
+        <img src="" alt="Certificate Full Preview" class="cert-img-modal-img" id="cert-img-modal-img" />
+      </div>
+    </div>
+
+    <button onclick="location.href='index.html'" style="position: fixed; bottom: 20px; right: 20px; padding: 10px 20px; background-color: #3e044d; color: white; border: none; border-radius: 5px; cursor: pointer;">Back to Home</button>
+
+    <script>
+      // Particle.js config (professional, subtle, matches portfolio)
+      particlesJS("particles-js", {
+        "particles": {
+          "number": {
+            "value": 80,
+            "density": { "enable": true, "value_area": 1200 }
+          },
+          "color": { "value": ["#7c4dff", "#43e6ee", "#ff1744", "#4361ee"] },
+          "shape": { "type": "circle" },
+          "opacity": {
+            "value": 0.7,
+            "random": true,
+            "anim": { "enable": true, "speed": 0.5, "opacity_min": 0.3, "sync": false }
+          },
+          "size": {
+            "value": 4,
+            "random": true,
+            "anim": { "enable": true, "speed": 2, "size_min": 0.1, "sync": false }
+          },
+          "line_linked": {
+            "enable": true,
+            "distance": 150,
+            "color": "#7c4dff",
+            "opacity": 0.4,
+            "width": 1
+          },
+          "move": {
+            "enable": true,
+            "speed": 0.7,
+            "direction": "none",
+            "random": true,
+            "straight": false,
+            "out_mode": "out",
+            "bounce": true,
+            "attract": { "enable": true, "rotateX": 600, "rotateY": 1200 }
+          }
+        },
+        "interactivity": {
+          "detect_on": "canvas",
+          "events": {
+            "onhover": { "enable": true, "mode": "grab" },
+            "onclick": { "enable": true, "mode": "push" },
+            "resize": true
+          },
+          "modes": {
+            "grab": { "distance": 140, "line_linked": { "opacity": 1 } },
+            "bubble": { "distance": 400, "size": 40, "duration": 2, "opacity": 8, "speed": 3 },
+            "repulse": { "distance": 200, "duration": 0.4 },
+            "push": { "particles_nb": 4 },
+            "remove": { "particles_nb": 2 }
+          }
+        },
+        "retina_detect": true
+      });
+
+      // Certificate image pop-out modal
+      document.querySelectorAll('.cert-img').forEach(function(img) {
+        img.addEventListener('click', function() {
+          var modal = document.getElementById('cert-img-modal');
+          var modalImg = document.getElementById('cert-img-modal-img');
+          modalImg.src = this.src;
+          modal.classList.add('active');
+        });
+      });
+      document.getElementById('cert-img-modal-close').onclick = function() {
+        document.getElementById('cert-img-modal').classList.remove('active');
+      };
+      document.getElementById('cert-img-modal').onclick = function(event) {
+        if (event.target === this) {
+          this.classList.remove('active');
+        }
+      };
+
+      // Background Music Player Control
+      const backgroundMusic = document.getElementById('background-music');
+      const musicControlButton = document.getElementById('music-control-btn');
+      const musicControlIcon = musicControlButton.querySelector('.icon-container i'); // Target icon within its container
+
+      function updateButtonState() {
+          if (backgroundMusic.paused) {
+              musicControlButton.classList.remove('playing');
+              musicControlButton.classList.add('paused'); // Optional: for specific paused styles
+              musicControlIcon.classList.remove('fa-pause');
+              musicControlIcon.classList.add('fa-play');
+              musicControlButton.setAttribute('aria-label', 'Play background music');
+          } else {
+              musicControlButton.classList.add('playing');
+              musicControlButton.classList.remove('paused'); // Optional
+              musicControlIcon.classList.remove('fa-play');
+              musicControlIcon.classList.add('fa-pause');
+              musicControlButton.setAttribute('aria-label', 'Pause background music');
+          }
+      }
+
+      // Set initial button state.
+      // Browsers might block autoplay with sound. This attempts to sync the button.
+      setTimeout(() => {
+          updateButtonState();
+          if (backgroundMusic.autoplay && backgroundMusic.paused) {
+              console.warn("Background music autoplay was likely prevented by the browser. User interaction may be needed to start.");
+          }
+      }, 150); // Small delay for browser to process autoplay
+
+      musicControlButton.addEventListener('click', () => {
+          if (backgroundMusic.paused) {
+              backgroundMusic.play().catch(error => console.error("Error playing music:", error));
+          } else {
+              backgroundMusic.pause();
+          }
+          // updateButtonState will be called by the audio element's 'play'/'pause' events
+      });
+
+      backgroundMusic.addEventListener('play', updateButtonState);
+      backgroundMusic.addEventListener('pause', updateButtonState);
+      backgroundMusic.addEventListener('ended', updateButtonState); // Handles if music finishes and loop is off
+    </script>
+</body>
+</html>

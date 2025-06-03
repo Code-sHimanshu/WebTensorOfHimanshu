@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Himanshu | Portfolio</title>
+  
+  <!-- Meta Tags -->
+  <meta name="description" content="Himanshu's Portfolio - AI/ML Developer creating innovative solutions for healthcare and web" />
+  <meta name="keywords" content="Himanshu, AI Developer, Machine Learning, Healthcare Tech, Web Development" />
+  <meta name="author" content="Himanshu Singh" />
+  
+  <!-- Open Graph Tags -->
+  <meta property="og:title" content="Himanshu Singh | AI/ML Developer" />
+  <meta property="og:description" content="Innovative solutions in AI, Machine Learning, Healthcare, and Web Development" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://code-shimanshu.github.io/HimanshuVista/" />
+  <meta property="og:image" content="https://your-portfolio-url.com/images/og-image.jpg" />
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png" />
+  
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet" />
+
+  <!-- Bootstrap & AOS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+  
+  <!-- Particle.js -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+  <!-- Custom Styles -->
+  <style>
+    :root {
+      --primary: #7c4dff;
+      --secondary: #651fff;
+      --accent: #ff4081;
+      --dark: #0f0524;
+      --light: #f8f9fa;
+      --text-dark: #1a0033;
+      --gradient-purple: linear-gradient(135deg, #7c4dff, #3a1cff);
+      --gradient-accent: linear-gradient(135deg, #ff4081, #ff6d00);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-dark);
+      background-color: #f9f5ff;
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Particle Background */
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: var(--dark);
+    }
+
+    /* Header Styles */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 1rem 0;
+      transition: all 0.3s ease;
+    }
+
+    header.scrolled {
+      background: rgba(15, 5, 36, 0.9);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      padding: 0.5rem 0;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+    }
+
+    .logo img {
+      height: 80px;
+      transition: all 0.3s ease;
+    }
+
+    header.scrolled .logo img {
+      height: 60px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      position: relative;
+      transition: all 0.3s ease;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 4rem;
+      position: relative;
+      color: white;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 10;
+    }
+
+    .profile-photo-container {
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .profile-photo {
+      width: 280px;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 5px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 10px 30px rgba(124, 77, 255, 0.4),
+                  0 0 0 10px rgba(124, 77, 255, 0.1);
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      z-index: 1;
+    }
+
+    .profile-photo:hover {
+      transform: scale(1.05);
+      box-shadow: 0 15px 40px rgba(124, 77, 255, 0.6),
+                  0 0 0 10px rgba(124, 77, 255, 0.2);
+      filter: brightness(1.05) saturate(1.1);
+    }
+
+    .profile-photo-container::before {
+      content: '';
+      position: absolute;
+      top: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(124, 77, 255, 0.4) 0%, transparent 70%);
+      z-index: 0;
+      animation: pulse 4s infinite ease-in-out;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: translateX(-50%) scale(1); opacity: 0.6; }
+      50% { transform: translateX(-50%) scale(1.1); opacity: 0.3; }
+    }
+
+    h1.hero-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, #ffffff, #e0c3fc);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 2rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .highlight {
+      font-weight: 700;
+      position: relative;
+      display: inline-block;
+    }
+
+    .highlight::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 64, 129, 0.4);
+      z-index: -1;
+      transition: all 0.3s ease;
+    }
+
+    .highlight:hover::after {
+      height: 15px;
+      background: rgba(255, 64, 129, 0.6);
+    }
+
+    .cta-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 30px;
+      border-radius: 50px;
+      background: var(--gradient-purple);
+      color: white;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 20px rgba(124, 77, 255, 0.3);
+      margin-top: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 30px rgba(124, 77, 255, 0.4);
+      background: var(--gradient-accent);
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: all 0.5s ease;
+    }
+
+    .cta-button:hover::before {
+      left: 100%;
+    }
+
+    /* Highlights Section */
+    .highlights-section {
+      padding: 6rem 2rem;
+      background: white;
+      position: relative;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 3rem;
+      color: var(--text-dark);
+      position: relative;
+      display: inline-block;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 4px;
+      background: var(--gradient-purple);
+      border-radius: 2px;
+    }
+
+    .highlights-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .highlight-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      border: 1px solid rgba(124, 77, 255, 0.1);
+    }
+
+    .highlight-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(124, 77, 255, 0.03) 0%, rgba(255, 64, 129, 0.03) 100%);
+      z-index: 1;
+    }
+
+    .highlight-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 40px rgba(124, 77, 255, 0.15);
+    }
+
+    .highlight-card img,
+    .highlight-card video {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-bottom: 1px solid rgba(124, 77, 255, 0.1);
+    }
+
+    .highlight-card-content {
+      padding: 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .highlight-card h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-dark);
+    }
+
+    .highlight-card p {
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    /* Music Control */
+    .music-control.hero-center {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 2.8rem;
+      margin-bottom: 1.5rem;
+    }
+    .music-control.hero-center .bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      height: 28px;
+      position: static;
+      transform: none;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+    .music-control.hero-center .bars span {
+      display: block;
+      width: 4px;
+      background: #15ff00;
+      border-radius: 2px;
+      animation: bounce 1s infinite ease-in-out;
+    }
+    .music-control.hero-center .bars span:nth-child(1) { height: 30%; animation-delay: 0s; }
+    .music-control.hero-center .bars span:nth-child(2) { height: 60%; animation-delay: 0.2s; }
+    .music-control.hero-center .bars span:nth-child(3) { height: 40%; animation-delay: 0.4s; }
+    .music-control.hero-center .bars span:nth-child(4) { height: 80%; animation-delay: 0.6s; }
+    .music-control.hero-center .bars span:nth-child(5) { height: 50%; animation-delay: 0.8s; }
+    .music-control.hero-center .bars.playing {
+      opacity: 1;
+    }
+    .music-control.hero-center .bars.paused {
+      opacity: 0.4;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: scaleY(1); }
+      50% { transform: scaleY(0.3); }
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 3rem 0;
+      text-align: center;
+    }
+
+    .social-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .social-icons a {
+      color: white;
+      font-size: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .social-icons a:hover {
+      color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .footer-contact {
+      font-size: 1rem;
+      margin-top: 1rem;
+    }
+
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--gradient-purple);
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(124, 77, 255, 0.3);
+      transition: all 0.3s ease;
+      opacity: 0;
+      visibility: hidden;
+      z-index: 999;
+    }
+
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .back-to-top:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(124, 77, 255, 0.4);
+      background: var(--gradient-accent);
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 992px) {
+      .nav-links {
+        gap: 1.5rem;
+      }
+      
+      h1.hero-title {
+        font-size: 3rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1.3rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .navbar {
+        padding: 0 1rem;
+      }
+      
+      .nav-links {
+        display: none;
+      }
+      
+      #menu-toggle {
+        display: block;
+        font-size: 1rem;
+        color: rgb(255, 255, 255);
+        cursor: pointer;
+      }
+      
+      h1.hero-title {
+        font-size: 2.5rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+      
+      .profile-photo {
+        width: 220px;
+        height: 220px;
+      }
+      
+      .profile-photo-container::before {
+        width: 260px;
+        height: 260px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      h1.hero-title {
+        font-size: 2rem;
+      }
+      
+      .section-title {
+        font-size: 2rem;
+      }
+      
+      .highlights-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .music-control {
+        top: 20px;
+        right: 20px;
+      }
+      
+      .music-control button {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* Animation Classes */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideUp {
+      from { 
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to { 
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .animate-fade-in {
+      animation: fadeIn 1s ease forwards;
+    }
+
+    .animate-slide-up {
+      animation: slideUp 0.8s ease forwards;
+    }
+
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+    .delay-4 { animation-delay: 0.4s; }
+    .delay-5 { animation-delay: 0.5s; }
+
+    /* Sidebar (menu) icon को clearly visible बनाएं */
+    #menu-toggle {
+      color: #fff !important;
+      opacity: 1 !important;
+      z-index: 3000 !important;
+      font-size: 2.2rem !important;
+      transition: color 0.2s;
+    }
+    #menu-toggle:hover {
+      color: #ff4081 !important;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Particle.js Background -->
+  <div id="particles-js"></div>
+  
+  <!-- Header -->
+  <header id="header">
+    <nav class="navbar">
+      <div class="logo">
+        <img src="logo1.png" alt="Himanshu Logo" id="navbar-logo" />
+      </div>
+      <ul class="nav-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="certification.html">Certifications</a></li>
+        <li><a href="activities.html">Activities</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+      <i class="fas fa-bars" id="menu-toggle"></i>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero">
+    <div class="hero-content">
+      <div class="profile-photo-container animate-slide-up">
+        <img src="himanshu_passport_size_picture.jpg" alt="Himanshu Singh" class="profile-photo" />
+      </div>
+      <div class="music-control hero-center">
+        <div class="bars" id="music-bars" style="cursor:pointer;">
+          <span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <audio id="background-music" loop>
+          <source src="assets/music/portfolio-harmony-221983.mp3" type="audio/mp3" />
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+      <h1 class="hero-title animate-slide-up delay-1">Himanshu Singh</h1>
+      <p class="hero-subtitle animate-slide-up delay-2">
+        <span class="highlight">AI</span>, <span class="highlight">ML</span>, 
+        <span class="highlight">healthcare</span>, and <span class="highlight">web development</span> 
+        enthusiast—crafting innovative, real-world solutions that make an impact.
+      </p>
+      <a href="projects.html" class="cta-button animate-slide-up delay-3">
+        <i class="fas fa-arrow-right"></i> View My Work
+      </a>
+    </div>
+  </section>
+
+  <!-- Highlights Section -->
+  <section class="highlights-section">
+    <h2 class="section-title animate-fade-in">Featured Highlights</h2>
+    <div class="highlights-grid">
+      <div class="highlight-card animate-slide-up delay-1">
+        <img src="https://drive.google.com/file/d/1CKH1p8tAFrYCT61nbfjMkkvVroRNJrO4/view?usp=drive_link" alt="AI Project" />
+        <div class="highlight-card-content">
+          <h3>AI Healthcare Solution</h3>
+          <p>Revolutionary AI system for early disease detection with 97% accuracy.</p>
+        </div>
+      </div>
+      
+      <div class="highlight-card animate-slide-up delay-2">
+        <img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Web Project" />
+        <div class="highlight-card-content">
+          <h3>Modern Web Platform</h3>
+          <p>Interactive dashboard with real-time analytics and visualization.</p>
+        </div>
+      </div>
+      
+      <div class="highlight-card animate-slide-up delay-3">
+        <img src="https://images.unsplash.com/photo-1581092921461-39b9d08a9b21?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="ML Project" />
+        <div class="highlight-card-content">
+          <h3>Machine Learning Model</h3>
+          <p>Advanced predictive algorithms for healthcare diagnostics.</p>
+        </div>
+      </div>
+      
+      <div class="highlight-card animate-slide-up delay-4">
+        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Data Project" />
+        <div class="highlight-card-content">
+          <h3>Data Visualization</h3>
+          <p>Beautiful interactive charts for complex datasets.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="social-icons">
+      <a href="https://linkedin.com/in/himanshu-singh-392699286" target="_blank"><i class="fab fa-linkedin"></i></a>
+      <a href="https://github.com/Code-sHimanshu" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="mailto:info.shimanshu@gmail.com"><i class="fas fa-envelope"></i></a>
+      <a href="https://www.kaggle.com/shimanshusingh" target="_blank"><i class="fab fa-kaggle"></i></a>
+      <a href="https://unsplash.com/" target="_blank"><i class="fab fa-unsplash"></i></a>
+    </div>
+    <div class="footer-contact">
+      <i class="fas fa-phone-alt"></i> +91-8317000925
+    </div>
+    <p>&copy; 2023 Himanshu Singh. All rights reserved.</p>
+  </footer>
+
+  <!-- Back to Top Button -->
+  <button id="back-to-top" class="back-to-top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Header scroll effect
+    window.addEventListener('scroll', function() {
+      const header = document.getElementById('header');
+      if (window.scrollY > 50) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Back to top button
+    const backToTopButton = document.getElementById('back-to-top');
+    
+    window.addEventListener('scroll', () => {
+      if (window.pageYOffset > 300) {
+        backToTopButton.classList.add('show');
+      } else {
+        backToTopButton.classList.remove('show');
+      }
+    });
+
+    backToTopButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Music control
+    document.addEventListener("DOMContentLoaded", function() {
+      const musicBars = document.getElementById('music-bars');
+      const music = document.getElementById('background-music');
+      
+      // Initial state
+      music.pause();
+      musicBars.classList.add('paused');
+
+      function updateBars() {
+        if (music.paused) {
+          musicBars.classList.remove('playing');
+          musicBars.classList.add('paused');
+        } else {
+          musicBars.classList.add('playing');
+          musicBars.classList.remove('paused');
+        }
+      }
+
+      musicBars.addEventListener('click', function() {
+        if (music.paused) {
+          music.play().then(() => {
+            updateBars();
+          }).catch(() => {
+            // Autoplay policy block
+          });
+        } else {
+          music.pause();
+          updateBars();
+        }
+      });
+
+      // Keyboard accessibility (Enter/Space)
+      musicBars.setAttribute('tabindex', '0');
+      musicBars.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          musicBars.click();
+        }
+      });
+
+      music.addEventListener('play', updateBars);
+      music.addEventListener('pause', updateBars);
+      music.addEventListener('ended', function() {
+        music.currentTime = 0;
+        updateBars();
+      });
+      updateBars();
+    });
+
+    // Initialize particles.js
+    particlesJS("particles-js", {
+      "particles": {
+        "number": {
+          "value": 80,
+          "density": {
+            "enable": true,
+            "value_area": 800
+          }
+        },
+        "color": {
+          "value": ["#7c4dff", "#ff4081", "#43e6ee", "#651fff", "#ffffff"]
+        },
+        "shape": {
+          "type": "circle",
+          "stroke": {
+            "width": 0,
+            "color": "#000000"
+          }
+        },
+        "opacity": {
+          "value": 0.7,
+          "random": true,
+          "anim": {
+            "enable": true,
+            "speed": 1,
+            "opacity_min": 0.3,
+            "sync": false
+          }
+        },
+        "size": {
+          "value": 6,
+          "random": true,
+          "anim": {
+            "enable": true,
+            "speed": 2,
+            "size_min": 1,
+            "sync": false
+          }
+        },
+        "line_linked": {
+          "enable": true,
+          "distance": 150,
+          "color": "#7c4dff",
+          "opacity": 0.4,
+          "width": 1
+        },
+        "move": {
+          "enable": true,
+          "speed": 1,
+          "direction": "none",
+          "random": true,
+          "straight": false,
+          "out_mode": "out",
+          "bounce": false,
+          "attract": {
+            "enable": true,
+            "rotateX": 600,
+            "rotateY": 1200
+          }
+        }
+      },
+      "interactivity": {
+        "detect_on": "canvas",
+        "events": {
+          "onhover": {
+            "enable": true,
+            "mode": "grab"
+          },
+          "onclick": {
+            "enable": true,
+            "mode": "push"
+          },
+          "resize": true
+        },
+        "modes": {
+          "grab": {
+            "distance": 140,
+            "line_linked": {
+              "opacity": 1
+            }
+          },
+          "bubble": {
+            "distance": 400,
+            "size": 40,
+            "duration": 2,
+            "opacity": 8,
+            "speed": 3
+          },
+          "repulse": {
+            "distance": 200,
+            "duration": 0.4
+          },
+          "push": {
+            "particles_nb": 4
+          },
+          "remove": {
+            "particles_nb": 2
+          }
+        }
+      },
+      "retina_detect": true
+    });
+
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const sidebar = document.createElement('div');
+    sidebar.innerHTML = `
+      <div id="sidebar" style="position: fixed; top: 0; right: -300px; width: 280px; height: 100%; background: #0f0554; z-index: 2000; transition: all 0.3s ease; padding: 2rem; box-shadow: -5px 0 15px rgba(0,0,0,0.2);">
+        <div style="display: flex; justify-content: flex-end; margin-bottom: 2rem;">
+          <span id="close-btn" style="font-size: 1.5rem; color: white; cursor: pointer;">&times;</span>
+        </div>
+        <ul style="list-style: none; padding: 0;">
+          <li style="margin-bottom: 1.5rem;"><a href="about.html" style="color: white; text-decoration: none; font-size: 1.1rem;">About</a></li>
+          <li style="margin-bottom: 1.5rem;"><a href="projects.html" style="color: white; text-decoration: none; font-size: 1.1rem;">Projects</a></li>
+          <li style="margin-bottom: 1.5rem;"><a href="gallery.html" style="color: white; text-decoration: none; font-size: 1.1rem;">Gallery</a></li>
+          <li style="margin-bottom: 1.5rem;"><a href="certification.html" style="color: white; text-decoration: none; font-size: 1.1rem;">Certifications</a></li>
+          <li style="margin-bottom: 1.5rem;"><a href="activities.html" style="color: white; text-decoration: none; font-size: 1.1rem;">Activities</a></li>
+          <li style="margin-bottom: 1.5rem;"><a href="contact.html" style="color: white; text-decoration: none; font-size: 1.1rem;">Contact</a></li>
+        </ul>
+        <div style="margin-top: 3rem;">
+          <h4 style="color: white; margin-bottom: 1rem;">Connect With Me</h4>
+          <div style="display: flex; gap: 1rem; font-size: 1.5rem;">
+            <a href="https://linkedin.com/in/himanshu-singh-392699286" target="_blank" style="color: white;"><i class="fab fa-linkedin"></i></a>
+            <a href="https://github.com/Code-sHimanshu" target="_blank" style="color: white;"><i class="fab fa-github"></i></a>
+            <a href="mailto:info.shimanshu@gmail.com" style="color: white;"><i class="fas fa-envelope"></i></a>
+            <a href="https://www.kaggle.com/shimanshusingh" target="_blank" style="color: white;"><i class="fab fa-kaggle"></i></a>
+            <a href="https://www.instagram.com/himanshu_singh_3107/" target="_blank" style="color: white;"><i class="fab fa-instagram"></i></a>
+            <a href="tel:+91 8317000925" target="_blank" style="color: white;"><i class="fas fa-phone"></i></a>
+            <a href="https://unsplash.com/" target="_blank" style="color: white;"><i class="fab fa-unsplash"></i></a>
+          </div>
+        </div>
+      </div>
+      <div id="sidebar-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1999; display: none;"></div>
+    `;
+    document.body.appendChild(sidebar);
+
+    menuToggle.addEventListener('click', function() {
+      document.getElementById('sidebar').style.right = '0';
+      document.getElementById('sidebar-overlay').style.display = 'block';
+    });
+
+    document.getElementById('close-btn').addEventListener('click', function() {
+      document.getElementById('sidebar').style.right = '-300px';
+      document.getElementById('sidebar-overlay').style.display = 'none';
+    });
+
+    document.getElementById('sidebar-overlay').addEventListener('click', function() {
+      document.getElementById('sidebar').style.right = '-300px';
+      this.style.display = 'none';
+    });
+
+    // Initialize AOS animations
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true
+    });
+  </script>
+</body>
+</html>
