@@ -143,7 +143,7 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 8rem 2rem 4rem;
+      padding: 8rem 2rem 0rem;
       position: relative;
       color: white;
     }
@@ -219,6 +219,7 @@
       margin-right: auto;
     }
 
+  
     .highlight {
       font-weight: 700;
       position: relative;
@@ -278,6 +279,300 @@
 
     .cta-button:hover::before {
       left: 100%;
+    }
+
+    /* Skills Section Styles */
+    .skills-section {
+      margin: 0px auto;
+      max-width: 1100px;
+      padding: 2rem 1rem;
+      padding-bottom: 9rem;
+      border-radius: 2rem;
+      animation: fadeInUp 1.5s;
+      position: relative;
+    }
+
+    .skills-section h3 {
+      font-size: 2.8rem;
+      font-weight: 900;
+      background: linear-gradient(90deg, #7c4dff, #43e6ee, #ff1745a1, #7a8acf);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gradientMove 4s ease-in-out infinite;
+      margin-bottom: 2.5rem;
+      position: relative;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Enhanced 3D Rotating Skills Carousel */
+    .wrapper {
+      width: 100%;
+      height: 420px;
+      position: relative;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: visible;
+      margin-bottom: 3rem;
+      margin-top: 2rem;
+      perspective: 1200px;
+    }
+
+    .inner {
+      --w: 120px;
+      --h: 170px;
+      --translateZ: calc((var(--w) + var(--h)) + 5px);
+      --rotateX: -15deg;
+      position: relative;
+      width: var(--w);
+      height: var(--h);
+      transform-style: preserve-3d;
+      animation: rotating 20s linear infinite;
+    }
+
+    @keyframes rotating {
+      from { transform: rotateX(var(--rotateX)) rotateY(0); }
+      to { transform: rotateX(var(--rotateX)) rotateY(1turn); }
+    }
+
+    .card {
+      position: absolute;
+      border: 2px solid rgba(124,77,255,0.3);
+      border-radius: 16px;
+      overflow: hidden;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 8px 32px 0 rgba(124, 77, 255, 0.15);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 1.2rem 1.5rem;
+      min-width: 220px;
+      min-height: 230px;
+      transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) translateZ(var(--translateZ));
+      cursor: pointer;
+      z-index: 1;
+      filter: blur(0);
+      transform-origin: center;
+    }
+
+    /* Hover effect - enhanced glow and rotation */
+    .inner:hover .card {
+      filter: blur(3px);
+      opacity: 0.5;
+      transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) translateZ(var(--translateZ)) scale(0.5);
+    }
+
+    .inner .card:hover {
+      filter: blur(0) !important;
+      opacity: 1 !important;
+      transform: rotateY(calc((360deg / var(--quantity)) * var(--index))) translateZ(calc(var(--translateZ) * 1.2)) scale(1.2) !important;
+      z-index: 10;
+      box-shadow: 0 0 30px rgba(124, 77, 255, 0.6),
+                  0 0 60px rgba(124, 77, 255, 0.4),
+                  0 0 90px rgba(124, 77, 255, 0.2);
+      border-color: rgba(124,77,255,0.8);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.85));
+      animation: cardPulse 2s infinite;
+    }
+
+    @keyframes cardPulse {
+      0% {
+        box-shadow: 0 0 30px rgba(124, 77, 255, 0.6),
+                    0 0 60px rgba(124, 77, 255, 0.4),
+                    0 0 90px rgba(124, 77, 255, 0.2);
+      }
+      50% {
+        box-shadow: 0 0 40px rgba(255, 64, 129, 0.6),
+                    0 0 80px rgba(255, 64, 129, 0.4),
+                    0 0 120px rgba(255, 64, 129, 0.2);
+      }
+      100% {
+        box-shadow: 0 0 30px rgba(124, 77, 255, 0.6),
+                    0 0 60px rgba(124, 77, 255, 0.4),
+                    0 0 90px rgba(124, 77, 255, 0.2);
+      }
+    }
+
+    .card .skill-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--primary);
+      transition: all 0.4s ease;
+    }
+
+    .card:hover .skill-icon {
+      color: var(--accent);
+      transform: scale(1.1) rotate(360deg);
+      filter: drop-shadow(0 0 8px rgba(255, 64, 129, 0.4));
+      animation: iconFloat 2s ease-in-out infinite;
+    }
+
+    @keyframes iconFloat {
+      0%, 100% {
+        transform: translateY(0) scale(1.1);
+      }
+      50% {
+        transform: translateY(-10px) scale(1.1);
+      }
+    }
+
+    .card .skill-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+      transition: all 0.4s ease;
+      position: relative;
+    }
+
+    .card:hover .skill-title {
+      color: var(--primary);
+      text-shadow: 0 0 10px rgba(124, 77, 255, 0.3);
+      animation: titleGlow 2s infinite;
+    }
+
+    @keyframes titleGlow {
+      0%, 100% {
+        text-shadow: 0 0 10px rgba(124, 77, 255, 0.3);
+      }
+      50% {
+        text-shadow: 0 0 20px rgba(255, 64, 129, 0.5);
+      }
+    }
+
+    .skill-tags-hidden {
+      display: none;
+    }
+
+    /* Enhanced Skill Modal Styles */
+    .skill-modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(15, 5, 36, 0.95);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(2px);
+      transition: all 0.3s ease;
+    }
+
+    .skill-modal-overlay.active {
+      display: flex;
+    }
+
+    .skill-modal-card {
+      background: rgba(255,255,255,0.98);
+      border-radius: 2rem;
+      box-shadow: 0 25px 50px -12px rgba(124, 77, 255, 0.25);
+      padding: 3rem 2.5rem;
+      min-width: 320px;
+      max-width: 90vw;
+      min-height: 220px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      animation: popout 0.4s cubic-bezier(0.4,0,0.2,1);
+      overflow-y: auto;
+      border: 1px solid rgba(124, 77, 255, 0.2);
+    }
+
+    @keyframes popout {
+      0% { transform: scale(0.7) translateY(60px); opacity: 0; }
+      100% { transform: scale(1) translateY(0); opacity: 1; }
+    }
+
+    .skill-modal-close {
+      position: absolute;
+      top: 1.2rem;
+      right: 1.5rem;
+      font-size: 2rem;
+      color: var(--accent);
+      cursor: pointer;
+      z-index: 2;
+      transition: all 0.2s ease;
+    }
+
+    .skill-modal-close:hover {
+      color: var(--primary);
+      transform: scale(1.1);
+    }
+
+    .skill-modal-content {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .modal-inner-content {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .modal-inner-content i {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+    }
+
+    .modal-inner-content h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      color: var(--dark);
+      text-align: center;
+    }
+
+    .modal-tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.8rem;
+      margin-top: 1.5rem;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .modal-tags-container .skill-tag {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border-radius: 30px;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(124, 77, 255, 0.2);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .modal-tags-container .skill-tag:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(124, 77, 255, 0.3);
+      background: linear-gradient(90deg, var(--accent), var(--primary));
     }
 
     /* Updated Highlights Section */
@@ -578,76 +873,90 @@
 
     /* Responsive Styles */
     @media (max-width: 992px) {
-      .nav-links {
-        gap: 1.5rem;
+      .wrapper {
+        height: 320px;
+        perspective: 800px;
       }
       
-      h1.hero-title {
-        font-size: 3rem;
+      .inner {
+        --w: 100px;
+        --h: 140px;
       }
       
-      .hero-subtitle {
-        font-size: 1.3rem;
+      .card {
+        min-width: 180px;
+        min-height: 200px;
+        padding: 1rem;
+      }
+      
+      .card .skill-icon {
+        font-size: 2rem;
+        margin-bottom: 0.8rem;
+      }
+      
+      .card .skill-title {
+        font-size: 1.1rem;
+        margin-bottom: 0.3rem;
       }
     }
 
     @media (max-width: 768px) {
-      .navbar {
-        padding: 0 1rem;
+      .wrapper {
+        height: 280px;
+        perspective: 600px;
       }
       
-      .nav-links {
-        display: none;
+      .inner {
+        --w: 80px;
+        --h: 120px;
       }
       
-      #menu-toggle {
-        display: block;
+      .card {
+        min-width: 150px;
+        min-height: 180px;
+        padding: 0.8rem;
+      }
+      
+      .card .skill-icon {
+        font-size: 1.8rem;
+        margin-bottom: 0.6rem;
+      }
+      
+      .card .skill-title {
         font-size: 1rem;
-        color: rgb(255, 255, 255);
-        cursor: pointer;
-      }
-      
-      h1.hero-title {
-        font-size: 2.5rem;
-      }
-      
-      .hero-subtitle {
-        font-size: 1.1rem;
-      }
-      
-      .profile-photo {
-        width: 220px;
-        height: 220px;
-      }
-      
-      .profile-photo-container::before {
-        width: 260px;
-        height: 260px;
+        margin-bottom: 0.2rem;
       }
     }
 
     @media (max-width: 576px) {
-      h1.hero-title {
-        font-size: 2rem;
+      .wrapper {
+        height: 240px;
+        perspective: 500px;
       }
       
-      .section-title {
-        font-size: 2rem;
+      .inner {
+        --w: 60px;
+        --h: 100px;
       }
       
-      .highlights-grid {
-        grid-template-columns: 1fr;
+      .card {
+        min-width: 120px;
+        min-height: 150px;
+        padding: 0.6rem;
       }
       
-      .music-control {
-        top: 20px;
-        right: 20px;
+      .card .skill-icon {
+        font-size: 1.5rem;
+        margin-bottom: 0.4rem;
       }
       
-      .music-control button {
-        width: 40px;
-        height: 40px;
+      .card .skill-title {
         font-size: 0.9rem;
+        margin-bottom: 0.1rem;
+      }
+      
+      .skills-section h3 {
+        font-size: 1.8rem;
       }
     }
 
@@ -745,6 +1054,115 @@
       </a>
     </div>
   </section>
+
+  <!-- Skills Section -->
+  <section class="skills-section" data-aos="fade-up">
+    <h3>My Skills</h3>
+    <div class="wrapper">
+      <div class="inner" style="--quantity:7;">
+        <div class="card" style="--index:0; --quantity:7;">
+          <i class="fas fa-brain skill-icon"></i>
+          <div class="skill-title">Machine Learning & AI</div>
+          <div class="skill-tags-hidden">
+            <span class="skill-tag">Generative AI</span>
+            <span class="skill-tag">LLMs</span>
+            <span class="skill-tag">NLP</span>
+            <span class="skill-tag">Image Classification</span>
+            <span class="skill-tag">Data Annotation</span>
+            <span class="skill-tag">Deep Learning</span>
+            <span class="skill-tag">Transfer Learning</span>
+            <span class="skill-tag">Neural Networks</span>
+            <span class="skill-tag">Text Classification</span>
+          </div>
+        </div>
+        <div class="card" style="--index:1; --quantity:7;">
+          <i class="fas fa-code skill-icon"></i>
+          <div class="skill-title">Programming</div>
+          <div class="skill-tags-hidden">
+            <span class="skill-tag">Python</span>
+            <span class="skill-tag">C++</span>
+            <span class="skill-tag">Java</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">C#</span>
+            <span class="skill-tag">C</span>
+            <span class="skill-tag">MySQL</span>
+          </div>
+        </div>
+        <div class="card" style="--index:2; --quantity:7;">
+          <i class="fas fa-globe skill-icon"></i>
+          <div class="skill-title">Web Development</div>
+          <div class="skill-tags-hidden">
+            <span class="skill-tag">HTML5</span>
+            <span class="skill-tag">CSS3</span>
+            <span class="skill-tag">React.js</span>
+            <span class="skill-tag">Responsive Design</span>
+            <span class="skill-tag">Bootstrap</span>
+            <span class="skill-tag">Tailwind CSS</span>
+            <span class="skill-tag">Material UI</span>
+          </div>
+        </div>
+        <div class="card" style="--index:3; --quantity:7;">
+          <i class="fas fa-tools skill-icon"></i>
+          <div class="skill-title">Tech Tools</div>
+          <div class="skill-tags-hidden">
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">Canva</span>
+            <span class="skill-tag">Wordpress</span>
+            <span class="skill-tag">Vercel</span>
+            <span class="skill-tag">Netlify</span>
+            <span class="skill-tag">Google Colab</span>
+            <span class="skill-tag">Jupyter Notebook</span>
+            <span class="skill-tag">Kaggle</span>
+            <span class="skill-tag">Streamlit</span>
+            <span class="skill-tag">VS Code</span>
+            <span class="skill-tag">Cursor</span>
+          </div>
+        </div>
+        <div class="card" style="--index:4; --quantity:7;">
+          <i class="fas fa-robot skill-icon"></i>
+          <div class="skill-title">AI Tools</div>
+          <div class="skill-tags-hidden">
+            <span class="skill-tag">OpenAIChatGPT</span>
+            <span class="skill-tag">Google Gemini</span>
+            <span class="skill-tag">Azure</span>
+            <span class="skill-tag">Perplexity</span>
+            <span class="skill-tag">Blackbox AI</span>
+            <span class="skill-tag">Cursor</span>
+            <span class="skill-tag">Claude</span>
+          </div>
+        </div>
+        <div class="card" style="--index:5; --quantity:7;">
+          <i class="fas fa-database skill-icon"></i>
+          <div class="skill-title">Database</div>
+          <div class="skill-tags-hidden">
+            <span class="skill-tag">MongoDB</span>
+            <span class="skill-tag">MySQL</span>
+            <span class="skill-tag">PostgreSQL</span>
+            <span class="skill-tag">SQLite</span>
+            <span class="skill-tag">Firebase</span>
+            <span class="skill-tag">Google Cloud</span>
+          </div>
+        </div>
+        <div class="card" style="--index:6; --quantity:7;">
+          <i class="fas fa-cloud skill-icon"></i>
+          <div class="skill-title">Cloud & DevOps</div>
+          <div class="skill-tags-hidden">
+            <span class="skill-tag">CI/CD</span>
+            <span class="skill-tag">Vercel</span>
+            <span class="skill-tag">Netlify</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skill Modal -->
+  <div id="skill-modal" class="skill-modal-overlay">
+    <div class="skill-modal-card">
+      <span class="skill-modal-close">&times;</span>
+      <div class="skill-modal-content"></div>
+    </div>
+  </div>
 
   <!-- Updated Highlights Section -->
   <section class="highlights-section">
@@ -1363,6 +1781,106 @@
       duration: 800,
       easing: 'ease-in-out',
       once: true
+    });
+
+    // --- Pop-out Skill Card Modal (show tags only in modal) ---
+    document.querySelectorAll('.skills-section .card').forEach(function(card) {
+      card.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var modal = document.getElementById('skill-modal');
+        var modalContent = modal.querySelector('.skill-modal-content');
+        
+        // Clear previous content
+        modalContent.innerHTML = '';
+        
+        // Create modal structure
+        var modalInner = document.createElement('div');
+        modalInner.className = 'modal-inner-content';
+        
+        // Add icon
+        var icon = card.querySelector('.skill-icon').cloneNode(true);
+        icon.style.fontSize = '3rem';
+        icon.style.marginBottom = '1.5rem';
+        icon.style.color = '#7c4dff';
+        modalInner.appendChild(icon);
+        
+        // Add title
+        var title = document.createElement('h3');
+        title.textContent = card.querySelector('.skill-title').textContent;
+        title.style.fontSize = '1.8rem';
+        title.style.marginBottom = '1.5rem';
+        title.style.color = '#22223b';
+        title.style.textAlign = 'center';
+        modalInner.appendChild(title);
+        
+        // Add tags container
+        var tagsContainer = document.createElement('div');
+        tagsContainer.className = 'modal-tags-container';
+        
+        // Get hidden tags and add them to container
+        var tagsHidden = card.querySelector('.skill-tags-hidden');
+        if (tagsHidden) {
+          tagsHidden.querySelectorAll('.skill-tag').forEach(function(tag) {
+            var newTag = tag.cloneNode(true);
+            newTag.style.padding = '0.8rem 1.5rem';
+            newTag.style.background = 'linear-gradient(90deg, #7c4dff, #651fff)';
+            newTag.style.color = 'white';
+            newTag.style.borderRadius = '30px';
+            newTag.style.fontWeight = '600';
+            newTag.style.boxShadow = '0 4px 12px rgba(124, 77, 255, 0.2)';
+            newTag.style.transition = 'all 0.3s ease';
+            newTag.style.cursor = 'pointer';
+            
+            newTag.addEventListener('mouseenter', function() {
+              this.style.transform = 'translateY(-3px)';
+              this.style.boxShadow = '0 8px 20px rgba(124, 77, 255, 0.3)';
+              this.style.background = 'linear-gradient(90deg, #ff4081, #7c4dff)';
+            });
+            
+            newTag.addEventListener('mouseleave', function() {
+              this.style.transform = 'translateY(0)';
+              this.style.boxShadow = '0 4px 12px rgba(124, 77, 255, 0.2)';
+              this.style.background = 'linear-gradient(90deg, #7c4dff, #651fff)';
+            });
+            
+            tagsContainer.appendChild(newTag);
+          });
+        }
+        
+        modalInner.appendChild(tagsContainer);
+        modalContent.appendChild(modalInner);
+        
+        // Show modal
+        modal.classList.add('active');
+      });
+    });
+
+    // Close modal on close button or overlay click
+    document.querySelector('.skill-modal-close').onclick = function(e) {
+      document.getElementById('skill-modal').classList.remove('active');
+    };
+
+    document.getElementById('skill-modal').onclick = function(e) {
+      if (e.target === this) {
+        this.classList.remove('active');
+      }
+    };
+
+    // Close modal with ESC key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && document.getElementById('skill-modal').classList.contains('active')) {
+        document.getElementById('skill-modal').classList.remove('active');
+      }
+    });
+
+    // Pause carousel animation on hover
+    const inner = document.querySelector('.inner');
+    inner.addEventListener('mouseenter', () => {
+      inner.style.animationPlayState = 'paused';
+    });
+    
+    inner.addEventListener('mouseleave', () => {
+      inner.style.animationPlayState = 'running';
     });
   </script>
 </body>
